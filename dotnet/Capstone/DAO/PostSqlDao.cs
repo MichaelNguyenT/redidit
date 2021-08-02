@@ -48,6 +48,11 @@ namespace Capstone.DAO
             return returnPost;
         }
 
+        public List<Post> GetPosts(int forumId)
+        {
+            return null;
+        }
+
         public Post CreatePost(int forumId, string postTitle, string username, string content)
         {
             Post returnPost = null;
