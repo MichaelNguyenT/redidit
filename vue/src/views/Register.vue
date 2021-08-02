@@ -1,11 +1,14 @@
 <template>
   <div id="register" class="text-center">
-    <form class="form-register" @submit.prevent="register">
+    <v-form class="form-register" @submit.prevent="register">
+      <v-container>
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
         {{ registrationErrorMsg }}
       </div>
-      <label for="username" class="sr-only">Username</label>
+      <v-row>
+      <v-col cols="12" sm="6" md="3">
+      <v-text-field label="Username" outlined class="sr-only">
       <input
         type="text"
         id="username"
@@ -15,7 +18,10 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6" md="3">
+      <v-text-field label="Password" outlined class="sr-only">
       <input
         type="password"
         id="password"
@@ -24,6 +30,10 @@
         v-model="user.password"
         required
       />
+      </v-text-field>
+      </v-col>
+      <v-col cols="12" sm="6" md="3">
+      <v-text-field label="Confirm Password" outlined class="sr-only">
       <input
         type="password"
         id="confirmPassword"
@@ -32,11 +42,15 @@
         v-model="user.confirmPassword"
         required
       />
+      </v-text-field>
+      </v-col>
+      </v-row>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
         Create Account
       </button>
-    </form>
+      </v-container>
+    </v-form>
   </div>
 </template>
 

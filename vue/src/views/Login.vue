@@ -1,6 +1,7 @@
 <template>
   <div id="login" class="text-center">
-    <form class="form-signin" @submit.prevent="login">
+    <v-form class="form-signin" @submit.prevent="login">
+      <v-container>
       <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
       <div
         class="alert alert-danger"
@@ -12,7 +13,9 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+      <v-row>
+      <v-col cols="12" sm="6" md="3">
+      <v-text-field label="Username" outlined class="sr-only">
       <input
         type="text"
         id="username"
@@ -22,7 +25,10 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+      </v-text-field>
+      </v-col>
+       <v-col cols="12" sm="6" md="3">
+      <v-text-field label="Password" outlined class="sr-only">
       <input
         type="password"
         id="password"
@@ -31,9 +37,13 @@
         v-model="user.password"
         required
       />
+      </v-text-field>
+       </v-col>
+      </v-row>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit">Sign in</button>
-    </form>
+     </v-container>
+    </v-form>
   </div>
 </template>
 
