@@ -17,7 +17,7 @@ namespace Capstone.DAO
         }
 
         public Post GetPost(string postTitle, string username, string content, int upvoteCounter, int downvoteCounter, DateTime postedDate)
-        {
+        { //maybe narrow down to just GetPosts? -- use hidden postId to pass if 100% necessary?
             Post returnPost = null;
 
 
