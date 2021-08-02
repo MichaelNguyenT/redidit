@@ -19,15 +19,18 @@ namespace Capstone.DAO
         {
             Post returnPost = null;
 
+
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("", conn);
-                    cmd.Parameters.AddWithValue("", postTitle);
-                    cmd.Parameters.AddWithValue("", postedDate);
+                    SqlCommand cmd = new SqlCommand("SELECT * " +
+                        "FROM posts " +
+                        "WHERE post_title = @title AND posted_date = @date; ", conn);
+                    cmd.Parameters.AddWithValue("@title", postTitle);
+                    cmd.Parameters.AddWithValue("@date", postedDate);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
@@ -44,22 +47,47 @@ namespace Capstone.DAO
             return returnPost;
         }
 
-        public Post CreatePost(string postTitle, string username, string content)
+        public Post CreatePost(int forumId, string postTitle, string username, string content)
         {
-            return null;
+            Post returnPost = null;
+
+
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter) " +
+                        "VALUES (@forum_Id, @title, @username, @content, 0, 0)");
+                    cmd.Parameters.AddWithValue("@forum_Id", forumId);
+                    cmd.Parameters.AddWithValue("@title", postTitle);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@content", content);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+
+                throw;
+            }
+
+            return returnPost;
         }
 
         private Post GetPostFromReader(SqlDataReader reader)
         {
             Post p = new Post()
             {
-                PostId = Convert.ToInt32(reader[""]),
-                PostTitle = Convert.ToString(reader[""]),
-                Username = Convert.ToString(reader[""]),
-                Content = Convert.ToString(reader[""]),
-                UpvoteCounter = Convert.ToInt32(reader[""]),
-                DownvoteCounter = Convert.ToInt32(reader[""]),
-                PostedDate = Convert.ToDateTime(reader[""])
+                PostId = Convert.ToInt32(reader["post_id"]),
+                ForumId = Convert.ToInt32(reader["forum_id"]),
+                PostTitle = Convert.ToString(reader["post_title"]),
+                Username = Convert.ToString(reader["username"]),
+                Content = Convert.ToString(reader["content"]),
+                UpvoteCounter = Convert.ToInt32(reader["upvote_counter"]),
+                DownvoteCounter = Convert.ToInt32(reader["downvote_counter"]),
+                PostedDate = Convert.ToDateTime(reader["posted_date"])
             };
 
             return p;

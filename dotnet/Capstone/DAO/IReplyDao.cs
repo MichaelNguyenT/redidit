@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.DAO
 {
-    interface IReplyDao
+    public interface IReplyDao
     {
         Reply GetReply(int postId, string username, string content, DateTime postedDate);
         Reply CreateReply(int postId, string username, string content);
