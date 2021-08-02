@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using Capstone.Models;
 using Capstone.Security;
 using Capstone.Security.Models;
+using System.Collections.Generic;
 
 namespace Capstone.DAO
 {
@@ -44,7 +45,12 @@ namespace Capstone.DAO
             return returnPost;
         }
 
-        public Post CreatePost(string postTitle, string username, string content)
+        public List<Post> GetPosts(int forumId)
+        {
+            return null;
+        }
+
+        public Post CreatePost(int forumId, string postTitle, string username, string content)
         {
             return null;
         }
@@ -54,6 +60,7 @@ namespace Capstone.DAO
             Post p = new Post()
             {
                 PostId = Convert.ToInt32(reader[""]),
+                ForumId = Convert.ToInt32(reader[""]),
                 PostTitle = Convert.ToString(reader[""]),
                 Username = Convert.ToString(reader[""]),
                 Content = Convert.ToString(reader[""]),

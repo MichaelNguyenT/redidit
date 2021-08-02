@@ -8,6 +8,7 @@ namespace Capstone.Models
     public class Post
     {
         public int PostId { get; set; }
+        public int ForumId { get; set; }
         public string PostTitle { get; set; }
         public string Username { get; set; }
         public string Content { get; set; }

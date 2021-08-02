@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Capstone.DAO
 {
-    interface IPostDao
+    public interface IPostDao
     {
         Post GetPost(string postTitle, string username, string content, int upvoteCounter, int downvoteCounter, DateTime postedDate);
-        Post CreatePost(string postTitle, string username, string content);
+        List<Post> GetPosts(int forumId);
+        Post CreatePost(int forumId, string postTitle, string username, string content);
     }
 }
