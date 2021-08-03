@@ -1,9 +1,9 @@
 <template>
     <div> 
-        <v-container>
+        <v-container v-for="post in posts" v-bind:key="post.id">
         <v-row no-gutters align="center">
         <v-card elevation="3" outlined shaped>
-            <v-card-title>{{ post.title }}</v-card-title>
+            <v-card-title>{{ post.post_title }}</v-card-title>
             <v-card-subtitle>author</v-card-subtitle>
             <v-card-subtitle>Date/Time of Post</v-card-subtitle>
             <v-divider class="mt-0 mx-4"></v-divider>
