@@ -38,11 +38,11 @@ namespace Capstone.Controllers
         [HttpPost("/post")]
         public ActionResult<Reply> CreateReply(Reply reply)
         {
-            var returnReply = replyDao.CreateReply(reply.ReplyId, reply.Username, reply.Content);
+            var returnReply = replyDao.CreateReply(reply.PostId, reply.Username, reply.Content);
 
             if (returnReply != null)
             {
-                return Ok(reply);
+                return Ok(returnReply);
             }
             return NotFound();
         }

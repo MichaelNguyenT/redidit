@@ -26,7 +26,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("  SELECT reply_id, post_id, username, content, posted_date " +
+                    SqlCommand cmd = new SqlCommand("SELECT reply_id, post_id, username, content, posted_date " +
                         "FROM replies " +
                         "WHERE reply_id = @replyId", conn);
                     cmd.Parameters.AddWithValue("@replyId", replyId);
@@ -76,7 +76,7 @@ namespace Capstone.DAO
 
         public Reply CreateReply(int postId, string username, string content)
         {
-            Post returnReply = null;
+            Reply returnReply = null;
             int newReplyId = 0;
 
             try
@@ -87,7 +87,7 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO replies (post_id, username, content, posted_date) " +
                         "OUTPUT INSERTED.*" +
-                        "VALUES (@postId, @username, @content, GETDATE())", conn);
+                        "VALUES (@post_Id, @username, @content, GETDATE())", conn);
                     cmd.Parameters.AddWithValue("@post_Id", postId);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@content", content);
