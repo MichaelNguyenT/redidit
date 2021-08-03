@@ -1,11 +1,12 @@
 <template>
     <div>
+        <div v-for="post in posts" v-bind:key="post.postId">
         <v-container>
         <v-row no-gutters align="center">
         <v-card elevation="3" outlined shaped>
-            <v-card-title class="pa-md-1">A title to rule all titles....</v-card-title>
-            <v-card-subtitle class="pa-md-1">UserNameOfUserNames</v-card-subtitle>
-            <v-card-subtitle class="pa-md-1">8/3/2021 12:57pm</v-card-subtitle>
+            <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
+            <v-card-subtitle>{{post.username}}</v-card-subtitle>
+            <v-card-subtitle class="pa-md-1">{{post.postedDate}}</v-card-subtitle>
             <v-divider class="mt-0 mx-4"></v-divider>
             <v-col class="d-flex justify-space-between align-center">
                 <v-img
@@ -42,6 +43,7 @@
         </v-card>
         </v-row>
        </v-container>
+         </div>
     </div>
 </template>
 
@@ -58,7 +60,7 @@ export default {
     created() {
         postService.getPost().then(
             (resp) => {
-                this.post = resp.data;
+                this.posts = resp.data;
             }
         )
     }

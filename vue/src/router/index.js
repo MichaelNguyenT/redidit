@@ -55,7 +55,7 @@ const router = new Router({
       }
     },
     {
-      path: "/postdetails",
+      path: "/forum/1",
       name: "post-details",
       component: PostDetail,
       meta: {

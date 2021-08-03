@@ -1,8 +1,12 @@
 import axios from 'axios';
+const http = axios.create({
+  baseURL: "https://localhost:44315"
+});
+
 
 export default {
 
     getPost() {
-        return axios.get('/postdetails')
+        return http.get(`/forum/${1}`)
       }
 }
