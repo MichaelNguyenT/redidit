@@ -16,10 +16,10 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        public Post GetPost(string postTitle, string username, string content, int upvoteCounter, int downvoteCounter, DateTime postedDate)
-        { //maybe narrow down to just GetPosts? -- use hidden postId to pass if 100% necessary?
+        public Post GetPost(int postId)
+        { //maybe narrow down to just GetPosts? -- use hidden postId to pass if 100% necessary? -DONE
+            //Changed this to retrieve a single post from a postID.
             Post returnPost = null;
-
 
             try
             {
@@ -27,11 +27,10 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT * " +
+                    SqlCommand cmd = new SqlCommand("SELECT post_id, forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date " +
                         "FROM posts " +
-                        "WHERE post_title = @title AND posted_date = @date; ", conn);
-                    cmd.Parameters.AddWithValue("@title", postTitle);
-                    cmd.Parameters.AddWithValue("@date", postedDate);
+                        "WHERE post_id = @post_ID;", conn);
+                    cmd.Parameters.AddWithValue("@post_ID", postId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if (reader.Read())
@@ -50,13 +49,37 @@ namespace Capstone.DAO
 
         public List<Post> GetPosts(int forumId)
         {
-            return null;
+            List<Post> posts = new List<Post>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT post_id, forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date " +
+                        "FROM posts " +
+                        "WHERE forum_id = @forumId", conn);
+                    cmd.Parameters.AddWithValue("forumId", forumId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        posts.Add(GetPostFromReader(reader));
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+            return posts;
         }
 
         public Post CreatePost(int forumId, string postTitle, string username, string content)
         {
             Post returnPost = null;
-
+            int newPostId = 0;
 
             try
             {
@@ -64,22 +87,22 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter) " +
-                        "VALUES (@forum_Id, @title, @username, @content, 0, 0)");
+                    SqlCommand cmd = new SqlCommand("INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) " +
+                        "VALUES (@forum_Id, @post_title, @username, @content, 0, 0, GETDATE())", conn);
                     cmd.Parameters.AddWithValue("@forum_Id", forumId);
-                    cmd.Parameters.AddWithValue("@title", postTitle);
+                    cmd.Parameters.AddWithValue("@post_title", postTitle);
                     cmd.Parameters.AddWithValue("@username", username);
                     cmd.Parameters.AddWithValue("@content", content);
-                    cmd.ExecuteNonQuery();
+                    //cmd.ExecuteNonQuery();
+                    newPostId = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
             catch (SqlException e)
             {
-
                 throw;
             }
 
-            return returnPost;
+            return GetPost(newPostId);
         }
 
         private Post GetPostFromReader(SqlDataReader reader)

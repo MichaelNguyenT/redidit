@@ -5,7 +5,7 @@ using Capstone.Security;
 
 namespace Capstone.Controllers
 {
-    [Route("[controller]")]
+    [Route("[controller]")]  //route is URL + 'login'
     [ApiController]
     public class LoginController : ControllerBase
     {
