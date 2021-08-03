@@ -15,6 +15,7 @@ namespace Capstone.Models
         public int UpvoteCounter { get; set; } = 0;
         public int DownvoteCounter { get; set; } = 0;
         public DateTime PostedDate { get; set; }
+        public List<Reply> Replies { get; set; }
     }
 
 

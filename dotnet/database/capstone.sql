@@ -15,6 +15,12 @@ USE final_capstone
 GO
 
 --create tables
+CREATE TABLE forums_list (
+	forum_id int IDENTITY(1,1) NOT NULL,
+	forum_title varchar(40) NOT NULL
+	CONSTRAINT PK_forums PRIMARY KEY (forum_id)
+)
+
 CREATE TABLE users (
 	user_id int IDENTITY(1,1) NOT NULL,
 	username varchar(50) NOT NULL,
@@ -46,22 +52,14 @@ CREATE TABLE replies (
 	CONSTRAINT PK_reply PRIMARY KEY (reply_id),
 	CONSTRAINT FK_post FOREIGN KEY (post_id) REFERENCES posts (post_id)
 )
-
-CREATE TABLE forums_list (
-	forum_id int IDENTITY(1,1) NOT NULL,
-	forum_title varchar(40) NOT NULL
-	CONSTRAINT PK_forums PRIMARY KEY (forum_id)
-)
-
-
 --populate default data
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
+INSERT INTO forums_list (forum_title) VALUES ('default forum')
+
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) VALUES (1, 'default post', 'user', 'this is a default post', 0, 0, GETDATE())
 
 INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'user', 'this is a default reply', GETDATE())
-
-INSERT INTO forums_list (forum_title) VALUES ('default forum')
 
 GO

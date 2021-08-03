@@ -16,9 +16,9 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
-        public Reply GetReply(int postId, string username, string content, DateTime postedDate)
+        public Reply GetReply(int replyId)
         {
-            Reply returnReply = null; 
+            Reply returnReply = null;
 
             try
             {
@@ -26,10 +26,10 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("  SELECT * " +
+                    SqlCommand cmd = new SqlCommand("  SELECT reply_id, post_id, username, content, posted_date " +
                         "FROM replies " +
-                        "WHERE post_id = @postId", conn);
-                    cmd.Parameters.AddWithValue("@postId", postId);
+                        "WHERE reply_id = @replyId", conn);
+                    cmd.Parameters.AddWithValue("@replyId", replyId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     if(reader.Read())
@@ -42,7 +42,6 @@ namespace Capstone.DAO
             {
                 throw;
             }
-
             return returnReply;
         }
 
@@ -72,12 +71,35 @@ namespace Capstone.DAO
             {
                 throw;
             }
-
             return replies;
         }
+
         public Reply CreateReply(int postId, string username, string content)
         {
-            throw new NotImplementedException();
+            Post returnReply = null;
+            int newReplyId = 0;
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("INSERT INTO replies (post_id, username, content, posted_date) " +
+                        "OUTPUT INSERTED.*" +
+                        "VALUES (@postId, @username, @content, GETDATE())", conn);
+                    cmd.Parameters.AddWithValue("@post_Id", postId);
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@content", content);
+                    newReplyId = Convert.ToInt32(cmd.ExecuteScalar());
+                }
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+
+            return GetReply(newReplyId);
         }
 
         private Reply GetReplyFromReader(SqlDataReader reader)

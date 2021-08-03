@@ -15,10 +15,12 @@ namespace Capstone.Controllers
     public class PostController : ControllerBase
     {
         private readonly IPostDao postDao;
+        private readonly IReplyDao replyDao;
 
-        public PostController(IPostDao _postDao)
+        public PostController(IPostDao _postDao, IReplyDao _replyDao)
         {
             postDao = _postDao;
+            replyDao = _replyDao;
         }
 
         [AllowAnonymous]
@@ -26,8 +28,20 @@ namespace Capstone.Controllers
         public ActionResult<List<Post>> GetPosts(int forumId)
         {
             List<Post> posts = new List<Post>();
-
             posts = postDao.GetPosts(forumId);
+
+            foreach (Post post in posts)
+            {
+                List<Reply> replies = new List<Reply>();
+
+                var replyResponses = replyDao.GetReplies(post.PostId);
+
+                foreach (Reply reply in replyResponses)
+                {
+                    replies.Add(reply);
+                }
+                
+            }
 
             if (posts != null)
             {
