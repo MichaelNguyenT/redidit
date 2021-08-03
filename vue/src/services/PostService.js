@@ -8,5 +8,9 @@ export default {
 
     getPost() {
         return http.get(`/forum/${1}`)
-      }
+      },
+
+    getReplies() {
+      return http.get(`/post/${2}`)
+    }
 }
