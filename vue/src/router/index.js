@@ -62,6 +62,14 @@ const router = new Router({
         requiresAuth: false
       }
     },
+    {
+      path: "/post/2",
+      name: "replies",
+      compenent: PostDetail,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 
