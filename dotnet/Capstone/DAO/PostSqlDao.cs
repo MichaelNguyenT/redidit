@@ -88,6 +88,7 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) " +
+                        "OUTPUT INSERTED.*" +
                         "VALUES (@forum_Id, @post_title, @username, @content, 0, 0, GETDATE())", conn);
                     cmd.Parameters.AddWithValue("@forum_Id", forumId);
                     cmd.Parameters.AddWithValue("@post_title", postTitle);
