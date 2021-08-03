@@ -57,8 +57,8 @@ namespace Capstone.DAO
 
                     SqlCommand cmd = new SqlCommand("SELECT reply_id, post_id, username, content, posted_date " +
                         "FROM replies " +
-                        "WHERE post_id = @postId", conn);
-                    cmd.Parameters.AddWithValue("@post_id", postId);
+                        "WHERE post_id = @post_Id", conn);
+                    cmd.Parameters.AddWithValue("@post_Id", postId);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
