@@ -30,18 +30,18 @@ namespace Capstone.Controllers
             List<Post> posts = new List<Post>();
             posts = postDao.GetPosts(forumId);
 
-            foreach (Post post in posts)
-            {
-                List<Reply> replies = new List<Reply>();
+            //foreach (Post post in posts)
+            //{
+            //    List<Reply> replies = new List<Reply>();
 
-                var replyResponses = replyDao.GetReplies(post.PostId);
+            //    var replyResponses = replyDao.GetReplies(post.PostId);
 
-                foreach (Reply reply in replyResponses)
-                {
-                    replies.Add(reply);
-                }
+            //    foreach (Reply reply in replyResponses)
+            //    {
+            //        replies.Add(reply);
+            //    }
                 
-            }
+            //}
 
             if (posts != null)
             {
