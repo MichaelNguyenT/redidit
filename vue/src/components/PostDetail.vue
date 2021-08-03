@@ -1,11 +1,11 @@
 <template>
-    <div> 
-        <v-container v-for="post in posts" v-bind:key="post.id">
+    <div>
+        <v-container>
         <v-row no-gutters align="center">
         <v-card elevation="3" outlined shaped>
-            <v-card-title>{{ post.post_title }}</v-card-title>
-            <v-card-subtitle>author</v-card-subtitle>
-            <v-card-subtitle>Date/Time of Post</v-card-subtitle>
+            <v-card-title>A title to rule all titles....</v-card-title>
+            <v-card-subtitle>UserNameOfUserNames</v-card-subtitle>
+            <v-card-subtitle>8/3/2021 12:57pm</v-card-subtitle>
             <v-divider class="mt-0 mx-4"></v-divider>
             <v-col class="d-flex justify-space-between align-center">
                 <v-img
@@ -33,10 +33,9 @@
         <v-subheader >Replies to this Post...</v-subheader>
         <v-spacer></v-spacer>
         <v-card elevation="3" outlined shaped>
-            <v-col class="d-flex justify-start mb-0">
-            <v-card-subtitle>Author of Reply</v-card-subtitle>
-            <v-card-subtitle>Date/Time of Reply</v-card-subtitle>
-            </v-col>
+            
+            <v-card-subtitle>UserNameOfReplies</v-card-subtitle>
+            <v-card-subtitle>8/4/2021 1:14am</v-card-subtitle>
             <v-divider class="mt-0 mx-4"></v-divider>
             <v-card-text>Maecenas eu diam facilisis, tincidunt elit at, laoreet dolor. Proin ultrices, ligula quis pellentesque pharetra, lorem est bibendum erat, in fermentum velit purus vel leo. Ut commodo ex vitae scelerisque laoreet. Curabitur nec viverra orci. Sed tempor lorem nec nisi dapibus, id tincidunt urna efficitur. Cras sagittis eros mollis mi faucibus, a accumsan elit rutrum. Donec vitae nibh posuere, condimentum turpis accumsan, posuere eros. Pellentesque faucibus, augue a tincidunt aliquet, tellus tellus interdum purus, ac rhoncus lectus diam eu purus. Praesent aliquam diam eu est varius, a hendrerit mauris laoreet. Aliquam pharetra eros nisl, sed pretium lorem sollicitudin id.Maecenas eu diam facilisis, tincidunt elit at, laoreet dolor. Proin ultrices, ligula quis pellentesque pharetra, lorem est bibendum erat, in fermentum velit purus vel leo. Ut commodo ex vitae scelerisque laoreet. Curabitur nec viverra orci. Sed tempor lorem nec nisi dapibus, id tincidunt urna efficitur. Cras sagittis eros mollis mi faucibus, a accumsan elit rutrum. Donec vitae nibh posuere, condimentum turpis accumsan, posuere eros. Pellentesque faucibus, augue a tincidunt aliquet, tellus tellus interdum purus, ac rhoncus lectus diam eu purus. Praesent aliquam diam eu est varius, a hendrerit mauris laoreet. Aliquam pharetra eros nisl, sed pretium lorem sollicitudin id.</v-card-text>
         </v-card>
@@ -52,7 +51,7 @@ import postService from '../services/PostService.js'
 export default {
     data() {
         return {
-            post: []
+            posts: []
         }
     },
     created() {
