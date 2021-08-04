@@ -6,7 +6,7 @@
       <v-toolbar-title>Re-Did-It</v-toolbar-title><v-spacer></v-spacer>
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link  v-bind:to="{name: 'post-details' }" >Hullo from Post Details!</router-link>
+      <router-link  v-bind:to="{name: 'post-details' }" >Sample Post!</router-link>
       </v-app-bar>
       </v-card>
     </div>

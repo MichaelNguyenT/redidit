@@ -24,27 +24,28 @@
             </v-col>
             <v-divider class="mt-0 mx-4"></v-divider>
             <v-col class="d-flex justify-end mb-1">
-            <v-chip class="ma-1">Yes
+            <v-chip class="ma-1" @click.native="addCounter(1)">
                  <v-icon medium>
-                     mdi-duck
+                     mdi-duck 
                 </v-icon>
+                Yes +{{ counterUp }}
             </v-chip>
-            <v-chip class="ma-1">Eww
+            <v-chip class="ma-1" @click.native="subtractCounter(-1)">
                  <v-icon medium>
-                     mdi-beehive-off-outline
+                     mdi-beehive-off-outline 
                 </v-icon>
+                Eww {{ counterDown }}
             </v-chip>
-            <v-chip class="ma-1" @click.native="displayReplies">See replies to this Post...</v-chip>
-            <v-dialog persistent v-model="dialog">
+            <v-chip class="ma-1" @click.native="displayReplies">See all replies...</v-chip>
+            <v-dialog v-model="dialog">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-chip v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
+                    <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
                 </template>
                 <v-card elevation="3" outlined shaped class="my-4">
                     <v-card-title>Hello!</v-card-title>
                     <v-textarea outlined label="What you think bud?" value="Your thoughts here...">{{ reply.content }}</v-textarea>
                     <v-card-actions>
                     <v-btn @click.native="addReply">Save</v-btn>
-                    <v-btn @click="dialog=false">Close</v-btn>
                     </v-card-actions>
                 </v-card>
             </v-dialog>
@@ -81,6 +82,8 @@ export default {
     data() {
         return {
             posts: [],
+            counterUp: 0,
+            counterDown: 0,
             replies: [],
             reply: {
                 postId: this.postID,
@@ -110,6 +113,12 @@ export default {
                     }
                  })
         },
+        addCounter(operand){
+            this.counterUp += operand;
+        },
+        subtractCounter(operand){
+            this.counterDown += operand;
+        }
     },
     filters: {
         moment: function(postedDate) {
