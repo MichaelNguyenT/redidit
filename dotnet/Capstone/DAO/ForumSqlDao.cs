@@ -24,13 +24,13 @@ namespace Capstone.DAO
 
             try
             {
-                using(SqlConnection conn = new SqlConnection(connectionString))
+                using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("INSERT INTO forums_list (forum_title) " +
                         "OUTPUT INSERTED.*" +
-                        "VALUES (@forum_title)");
+                        "VALUES (@forum_title)", conn);
                     cmd.Parameters.AddWithValue("@forum_title", forumTitle);
 
                     newForumId = Convert.ToInt32(cmd.ExecuteScalar());
@@ -40,17 +40,62 @@ namespace Capstone.DAO
             {
                 throw e;
             }
-            throw new NotImplementedException();
+            return GetForum(newForumId);
         }
 
+        //Optional to implement in the future, is not implemented in the ForumController
         public void DeleteForum(int forumId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("BEGIN TRANSACTION " +
+                                                        "DELETE FROM replies " +
+                                                        "WHERE post_id = @postId " +
+                                                        "DELETE FROM posts " +
+                                                        "WHERE post_id = @postId " +
+                                                        "DELETE FROM forums_list " +
+                                                        "WHERE forum_id = @forum_id " +
+                                                    "COMMIT TRANSACTION", conn);
+                    cmd.Parameters.AddWithValue("@forum_id", forumId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
         }
 
         public Forum GetForum(int forumId)
         {
-            throw new NotImplementedException();
+            Forum forum = new Forum();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT forum_id, forum_title " +
+                                                    "FROM forums_list " +
+                                                    "WHERE forum_id = @forumId;", conn);
+                    cmd.Parameters.AddWithValue("@forumId", forumId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        forum = GetForumFromReader(reader);
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+            return forum;
         }
 
         public List<Forum> GetForums()
@@ -66,7 +111,7 @@ namespace Capstone.DAO
                                                     "FROM forums_list", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
-                    if (reader.Read())
+                    while (reader.Read())
                     {
                         forums.Add(GetForumFromReader(reader));
                     }

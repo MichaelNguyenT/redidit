@@ -12,5 +12,7 @@ namespace Capstone.DAO
         List<Post> GetPosts(int forumId);
         Post CreatePost(int forumId, string postTitle, string username, string content);
         void DeletePost(int postId);
+        void UpdateUpvoteCounter(int postId, int upvoteCounter);
+        void UpdateDownvoteCounter(int postId, int downvoteCounter);
     }
 }

@@ -73,5 +73,28 @@ namespace Capstone.Controllers
             postDao.DeletePost(postId);
             return NoContent();
         }
+
+        [HttpPut("/upvote-counter/{postId}")]
+        public ActionResult UpdateUpvoteCounter(int postId, int upvoteCounter)
+        {
+            if (postDao.GetPost(postId) != null)
+            {
+                postDao.UpdateUpvoteCounter(postId, upvoteCounter);
+                return Ok();
+            }
+            return BadRequest(new { message = "An error occurred: Counters could not be updated."  });
+        }
+
+        [HttpPut("/downvote-counter/{postId}")]
+        public ActionResult UpdateDownvoteCounter(int postId, int downvoteCounter)
+        {
+            if (postDao.GetPost(postId) != null)
+            {
+                postDao.UpdateDownvoteCounter(postId, downvoteCounter);
+                return Ok();
+            }
+            return BadRequest(new { message = "An error occurred: Counters could not be updated." });
+        }
+
     }
 }

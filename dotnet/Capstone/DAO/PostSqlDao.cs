@@ -130,6 +130,50 @@ namespace Capstone.DAO
             }
         }
 
+        public void UpdateUpvoteCounter(int postId, int upvoteCounter) 
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE posts " +
+                        "SET upvote_counter = @upvoteCounter " +
+                        "WHERE post_id = @postId", conn);
+                    cmd.Parameters.AddWithValue("@upvoteCounter", upvoteCounter);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public void UpdateDownvoteCounter(int postId, int downvoteCounter)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE posts " +
+                        "SET downvote_counter = @downvoteCounter " +
+                        "WHERE post_id = @postId", conn);
+                    cmd.Parameters.AddWithValue("@downvoteCounter", downvoteCounter);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         private Post GetPostFromReader(SqlDataReader reader)
         {
             Post p = new Post()

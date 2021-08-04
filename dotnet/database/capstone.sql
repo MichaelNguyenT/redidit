@@ -60,6 +60,7 @@ INSERT INTO forums_list (forum_title) VALUES ('default forum')
 
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) VALUES (1, 'default post', 'user', 'this is a default post', 0, 0, GETDATE())
 
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'user', 'this is a default reply', GETDATE())
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'user', 'this is a default reply', GETDATE())
 
 GO
+

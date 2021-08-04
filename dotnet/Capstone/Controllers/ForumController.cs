@@ -25,7 +25,26 @@ namespace Capstone.Controllers
         [HttpGet("/")]
         public ActionResult<Forum> GetForums()
         {
-            throw new NotImplementedException();
+            List<Forum> forums = new List<Forum>();
+            forums = forumDao.GetForums();
+
+            if (forums != null)
+            {
+                return Ok(forums);
+            }
+            return NotFound();
+        }
+
+        [HttpPost("/")]
+        public ActionResult<Forum> CreateForum(Forum forum)
+        {
+            var returnForum = forumDao.CreateForum(forum.ForumTitle);
+
+            if (returnForum != null)
+            {
+                return Ok(returnForum);
+            }
+            return NotFound();
         }
     }
 }
