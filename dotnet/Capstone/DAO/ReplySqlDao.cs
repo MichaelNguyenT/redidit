@@ -16,6 +16,7 @@ namespace Capstone.DAO
         {
             connectionString = dbConnectionString;
         }
+
         public Reply GetReply(int replyId)
         {
             Reply returnReply = null;
