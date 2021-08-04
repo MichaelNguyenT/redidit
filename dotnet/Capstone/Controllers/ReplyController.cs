@@ -46,5 +46,16 @@ namespace Capstone.Controllers
             }
             return NotFound();
         }
+
+        [HttpDelete("/post/{replyId}")]
+        public ActionResult DeleteReply(int replyId)
+        {
+            if (replyDao.GetReply(replyId) == null)
+            {
+                return NotFound();
+            }
+            replyDao.DeleteReply(replyId);
+            return NoContent();
+        }
     }
 }

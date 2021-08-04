@@ -62,5 +62,16 @@ namespace Capstone.Controllers
             }
             return NotFound();
         }
+
+        [HttpDelete("/forum/{postId}")]
+        public ActionResult DeletePost(int postId)
+        {
+            if (postDao.GetPost(postId) == null)
+            {
+                return NotFound();
+            }
+            postDao.DeletePost(postId);
+            return NoContent();
+        }
     }
 }

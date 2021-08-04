@@ -106,6 +106,30 @@ namespace Capstone.DAO
             return GetPost(newPostId);
         }
 
+        public void DeletePost(int postId) //deletes post and all replies associated with that postId
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("BEGIN TRANSACTION "+
+                                                        "DELETE FROM replies "+
+                                                        "WHERE post_id = @postId "+
+                                                        "DELETE FROM posts "+
+                                                        "WHERE post_id = @postId " +
+                                                    "COMMIT TRANSACTION", conn);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+        }
+
         private Post GetPostFromReader(SqlDataReader reader)
         {
             Post p = new Post()

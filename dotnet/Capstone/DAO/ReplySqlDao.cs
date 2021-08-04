@@ -102,6 +102,26 @@ namespace Capstone.DAO
             return GetReply(newReplyId);
         }
 
+        public void DeleteReply(int replyId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("DELETE FROM replies " +
+                                                    "WHERE reply_id = @replyId", conn);
+                    cmd.Parameters.AddWithValue("@replyId", replyId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw;
+            }
+        }
+
         private Reply GetReplyFromReader(SqlDataReader reader)
         {
             Reply r = new Reply()

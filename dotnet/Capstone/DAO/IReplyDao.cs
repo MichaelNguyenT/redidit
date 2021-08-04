@@ -11,5 +11,6 @@ namespace Capstone.DAO
         Reply GetReply(int replyId);
         List<Reply> GetReplies(int postId);
         Reply CreateReply(int postId, string username, string content);
+        void DeleteReply(int replyId);
     }
 }
