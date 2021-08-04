@@ -36,7 +36,7 @@
                 </v-icon>
                 Eww {{ counterDown }}
             </v-chip>
-            <v-chip class="ma-1" @click.native="displayReplies">See all replies...</v-chip>
+            <v-chip class="ma-1">See all replies...</v-chip>
             <v-dialog v-model="dialog">
                 <template v-slot:activator="{ on, attrs }">
                     <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
@@ -52,22 +52,6 @@
             </v-col>
         </v-card>
         </div>
-        <v-timeline align-top dense>
-        <v-timeline-item v-for="reply in replies" v-bind:key="reply.replyId">
-            <template v-slot:icon>
-                <v-avatar>
-                    <img src="https://images-ext-2.discordapp.net/external/AdJWzJfIdpBJppSLXDGvxWy5Pgs9r4K5IczkHsiLU1g/https/i.ytimg.com/vi/GNc_ZKCmjJ8/maxresdefault.jpg?width=786&height=442">
-                </v-avatar>
-            </template>
-            <v-card elevation="3" outlined shaped class="pa-md-2">
-
-                <v-card-title class="py-0">{{ reply.username }}</v-card-title>
-                <v-card-text class="py-0">{{ reply.postedDate | moment }}</v-card-text>
-                <v-divider class="mt-0 mx-4"></v-divider>
-                <v-card-text>{{ reply.content }}</v-card-text>
-            </v-card>
-        </v-timeline-item>
-        </v-timeline>
         </v-row>
        </v-container>
     </div>
@@ -84,7 +68,6 @@ export default {
             posts: [],
             counterUp: 0,
             counterDown: 0,
-            replies: [],
             reply: {
                 postId: this.postID,
                 content: '',
@@ -99,12 +82,6 @@ export default {
             })
     },
     methods: {
-        displayReplies() {
-            postService.getReplies().then(
-            (resp) => {
-                this.replies = resp.data;
-            })
-        },
         addReply() {
              postService.addReply(this.reply).then(
                 (resp) =>{

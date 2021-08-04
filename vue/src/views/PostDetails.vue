@@ -1,14 +1,18 @@
 <template>
-    <div><post-detail /></div>
+    <div>
+        <post-detail />
+        <replies />
+        </div>
 </template>
 
 <script>
-
+import Replies from "../components/Replies.vue"
 import PostDetail from "../components/PostDetail.vue"
 export default {
     name: "post-details",
     components: {
-        PostDetail
+        PostDetail,
+        Replies
     }
 
 }
