@@ -63,7 +63,7 @@ const router = new Router({
       }
     },
     {
-      path: "/post/2",
+      path: "/post/1",
       name: "replies",
       compenent: PostDetail,
       meta: {

@@ -11,6 +11,10 @@ export default {
       },
 
     getReplies() {
-      return http.get(`/post/${2}`)
+      return http.get(`/post/${1}`)
+    },
+
+    addReply(reply) {
+      return http.post('/post', reply)
     }
 }
