@@ -30,6 +30,22 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 )
 
+CREATE TABLE user_favorite_forum(
+user_id int NOT NULL,
+forum_id int NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users (user_id),
+FOREIGN KEY (forum_id) REFERENCES forums_list (forum_id),
+UNIQUE (user_id, forum_id)
+)
+
+CREATE TABLE user_moderator_forum(
+user_id int NOT NULL,
+forum_id int NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users (user_id),
+FOREIGN KEY (forum_id) REFERENCES forums_list (forum_id),
+UNIQUE (user_id, forum_id)
+)
+
 CREATE TABLE posts (
 	post_id int IDENTITY(1,1) NOT NULL,
 	forum_id int NOT NULL,
