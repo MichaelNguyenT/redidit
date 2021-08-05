@@ -11,6 +11,7 @@ namespace Capstone.DAO
         Forum GetForum(int forumId);
         List<Forum> GetForums();
         Forum CreateForum(string forumTitle);
+        void promoteToModerator(int userId, int forumId);
         void DeleteForum(int forumId);
     }
 }

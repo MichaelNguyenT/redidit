@@ -70,6 +70,27 @@ namespace Capstone.DAO
             return GetUser(username);
         }
 
+        public void AddFavorite(int userId, int forumId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("", conn);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    cmd.Parameters.AddWithValue("@forum_id", forumId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+        }
+
         private User GetUserFromReader(SqlDataReader reader)
         {
             User u = new User()

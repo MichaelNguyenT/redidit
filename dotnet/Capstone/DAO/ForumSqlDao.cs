@@ -43,6 +43,28 @@ namespace Capstone.DAO
             return GetForum(newForumId);
         }
 
+        public void promoteToModerator(int userId, int forumId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("", conn);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    //Want to add a forum column for moderators that have a collection of user ids instead of changing user_role
+                    cmd.Parameters.AddWithValue("@forum_id", forumId);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+        }
+
         //Optional to implement in the future, is not implemented in the ForumController
         public void DeleteForum(int forumId)
         {
