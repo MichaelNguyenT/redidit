@@ -16,5 +16,13 @@ export default {
 
     addReply(reply) {
       return http.post('/post', reply)
+    },
+
+    updateUpvote(postId, upvoteCounter) {
+      return http.put(`/upvote-counter/${1}`, { postId : postId, upvoteCounter : upvoteCounter }) //takes postId at end of route
+    },
+
+    updateDownvote(postId, downvoteCounter) {
+      return http.put(`/downvote-counter/${1}`, { postId : postId, downvoteCounter : downvoteCounter })
     }
 }
