@@ -39,7 +39,7 @@ namespace Capstone.Controllers
         public ActionResult<Forum> CreateForum(Forum forum)
         {
             var returnForum = forumDao.CreateForum(forum.ForumTitle);
-            forumDao.promoteToModerator()
+            //forumDao.promoteToModerator();
             if (returnForum != null)
             {
                 return Ok(returnForum);

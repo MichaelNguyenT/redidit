@@ -71,7 +71,7 @@ const router = new Router({
         requiresAuth: false
       }
     }
-  ]
+    ]
 })
 
 router.beforeEach((to, from, next) => {

@@ -37,7 +37,7 @@
                 Eww {{ counterDown }}
             </v-chip>
             <v-chip class="ma-1">See all replies...</v-chip>
-            <v-dialog v-model="dialog">
+            <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
                     <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
                 </template>
@@ -54,15 +54,21 @@
         </div>
         </v-row>
        </v-container>
+      <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:replies="reply"></replies>
     </div>
 </template>
 
 <script>
+
 import moment from 'moment'
 import postService from '../services/PostService.js'
+import Replies from '../components/Replies.vue'
 
 
 export default {
+  components: { Replies },
+    name: 'post-details',
+    props: ['replies'],
     data() {
         return {
             posts: [],
