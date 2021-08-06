@@ -38,10 +38,9 @@ namespace Capstone.Controllers
         [HttpPost("/")]
         public ActionResult<Forum> CreateForum(Forum forum)
         {
-            var returnForum = forumDao.CreateForum(forum.ForumTitle);
-            
+            var returnForum = forumDao.CreateForum(forum.ForumTitle);        
             forumDao.PromoteToModerator(GetUserId(), forum.ForumId);
-            //User.Identity.Name
+
             if (returnForum != null)
             {
                 return Ok(returnForum);

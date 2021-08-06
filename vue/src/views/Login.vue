@@ -2,7 +2,7 @@
   <div id="login" class="text-center">
     <v-form class="form-signin" @submit.prevent="login">
       <v-container>
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+      <h1 class="h3 mb-3 font-weight-normal primary">Please Sign In</h1>
       <div
         class="alert alert-danger"
         role="alert"
@@ -41,7 +41,7 @@
        </v-col>
       </v-row>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit">Sign in</button>
+      <button type="submit" class="secondary--text">Sign in</button>
      </v-container>
     </v-form>
   </div>
@@ -82,5 +82,7 @@ export default {
         });
     }
   }
+  
 };
+
 </script>
