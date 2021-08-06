@@ -54,9 +54,19 @@ CREATE TABLE posts (
 	content varchar(3000) NOT NULL,
 	upvote_counter int NOT NULL,
 	downvote_counter int NOT NULL,
-	posted_date datetime NOT NULL
+	posted_date datetime NOT NULL,
+	image_url varchar(200),
 	CONSTRAINT PK_post PRIMARY KEY (post_id),
 	CONSTRAINT FK_forum FOREIGN KEY (forum_id) REFERENCES forums_list (forum_id)
+)
+
+CREATE TABLE user_vote_posts(
+user_id int NOT NULL,
+post_id int NOT NULL,
+vote BIT NOT NULL,
+FOREIGN KEY (user_id) REFERENCES users (user_id),
+FOREIGN KEY (post_id) REFERENCES posts (post_id),
+UNIQUE (user_id, post_id)
 )
 
 CREATE TABLE replies (
