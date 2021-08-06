@@ -16,6 +16,6 @@ namespace Capstone.DAO
         void UpdateDownvoteCounter(int postId, int userId);
         void AddVoteToVoteTable(int postId, int userId, int upOrDown);
         void DeleteVoteFromVoteTable(int userId, int postId);
-        bool CheckUserVoteStatus(int userId, int postId);
+        int CheckUserVoteStatus(int userId, int postId);
     }
 }

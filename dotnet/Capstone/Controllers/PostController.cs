@@ -62,7 +62,7 @@ namespace Capstone.Controllers
                 return NotFound();
             }
             else if(!forumDao.CheckUserModeratorForum(GetUserId(), postDao.GetPost(postId).ForumId)
-                || userDao.CheckAdmin(GetUserId())
+                || userDao.CheckAdmin(GetUserId()))
             {
                 return Unauthorized();
             }
@@ -75,12 +75,12 @@ namespace Capstone.Controllers
         {
             int currentUserId = GetUserId();
 
-            if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == false)
+            //if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == false)
             {
                 postDao.UpdateUpvoteCounter(postId, currentUserId);
                 return Ok();
             }
-            else if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == true)
+            //else if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == true)
             {
 
             }
