@@ -71,6 +71,37 @@ namespace Capstone.DAO
             return GetUser(username);
         }
 
+        public bool CheckAdmin(int userId)
+        {
+            bool isAdmin;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * " +
+                        "FROM users " +
+                        "WHERE user_id = @user_id AND user_role = 'admin';", conn);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if(reader.Read())
+                    {
+                        isAdmin = true;
+                    }
+                    else
+                    {
+                        isAdmin = false;
+                    }
+                }
+            }
+            catch (SqlException)
+            {
+                throw;
+            }
+            return isAdmin;
+        }
+
         private User GetUserFromReader(SqlDataReader reader)
         {
             User u = new User()

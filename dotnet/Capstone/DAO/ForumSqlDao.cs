@@ -44,7 +44,7 @@ namespace Capstone.DAO
             return GetForum(newForumId);
         }
 
-        public void promoteToModerator(int userId, int forumId)
+        public void PromoteToModerator(int userId, int forumId)
         {
             try
             {
@@ -66,6 +66,37 @@ namespace Capstone.DAO
             }
         }
 
+        public bool CheckUserModeratorForum(int userId, int forumId)
+        {
+            bool isUserModForForum;
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT * " +
+                        "FROM user_moderator_forum " +
+                        "WHERE user_id = @user_id AND forum_id = @forum_id;", conn);
+                    cmd.Parameters.AddWithValue("@user_id", userId);
+                    cmd.Parameters.AddWithValue("@forum_id", forumId);
+                    SqlDataReader reader = cmd.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        isUserModForForum = true;
+                    }
+                    else
+                    {
+                        isUserModForForum = false;
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+            return isUserModForForum;
+        }
         
 
 

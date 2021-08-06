@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="secondary">
         <post-detail />
         <replies />
     </div>

@@ -16,11 +16,15 @@ namespace Capstone.Controllers
     {
         private readonly IPostDao postDao;
         private readonly IReplyDao replyDao;
+        private readonly IForumDao forumDao;
+        private readonly IUserDao userDao;
 
-        public PostController(IPostDao _postDao, IReplyDao _replyDao)
+        public PostController(IPostDao _postDao, IReplyDao _replyDao, IForumDao _forumDao, IUserDao _userDao)
         {
             postDao = _postDao;
             replyDao = _replyDao;
+            forumDao = _forumDao;
+            userDao = _userDao;
         }
 
         [AllowAnonymous]
@@ -29,19 +33,6 @@ namespace Capstone.Controllers
         {
             List<Post> posts = new List<Post>();
             posts = postDao.GetPosts(forumId);
-
-            //foreach (Post post in posts)
-            //{
-            //    List<Reply> replies = new List<Reply>();
-
-            //    var replyResponses = replyDao.GetReplies(post.PostId);
-
-            //    foreach (Reply reply in replyResponses)
-            //    {
-            //        replies.Add(reply);
-            //    }
-                
-            //}
 
             if (posts != null)
             {
@@ -54,7 +45,7 @@ namespace Capstone.Controllers
         public ActionResult<Post> CreatePost(Post post)
         {
             //var returnPost = postDao.CreatePost(forumId, postTitle, username, content);
-            var returnPost = postDao.CreatePost(post.ForumId, post.PostTitle, post.Username, post.Content);
+            var returnPost = postDao.CreatePost(post.ForumId, post.PostTitle, post.Username, post.Content, post.ImageURL);
 
             if (returnPost != null)
             {
@@ -70,17 +61,28 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
+            else if(!forumDao.CheckUserModeratorForum(GetUserId(), postDao.GetPost(postId).ForumId)
+                || userDao.CheckAdmin(GetUserId())
+            {
+                return Unauthorized();
+            }
             postDao.DeletePost(postId);
             return NoContent();
         }
 
         [HttpPut("/post{postId}/upvotes{upvoteCounter}")]
-        public ActionResult UpdateUpvoteCounter(int postId, int upvoteCounter)
+        public ActionResult UpdateUpvoteCounter(int postId) //front end only needs to pass postId
         {
-            if (postDao.GetPost(postId) != null)
+            int currentUserId = GetUserId();
+
+            if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == false)
             {
-                postDao.UpdateUpvoteCounter(postId, upvoteCounter);
+                postDao.UpdateUpvoteCounter(postId, currentUserId);
                 return Ok();
+            }
+            else if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == true)
+            {
+
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated."  });
         }
@@ -95,6 +97,5 @@ namespace Capstone.Controllers
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated." });
         }
-
     }
 }
