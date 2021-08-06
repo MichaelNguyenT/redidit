@@ -74,7 +74,7 @@ namespace Capstone.Controllers
             return NoContent();
         }
 
-        [HttpPut("/upvote-counter/{postId}")]
+        [HttpPut("/post{postId}/upvotes{upvoteCounter}")]
         public ActionResult UpdateUpvoteCounter(int postId, int upvoteCounter)
         {
             if (postDao.GetPost(postId) != null)
@@ -85,7 +85,7 @@ namespace Capstone.Controllers
             return BadRequest(new { message = "An error occurred: Counters could not be updated."  });
         }
 
-        [HttpPut("/downvote-counter/{postId}")]
+        [HttpPut("/post{postId}/downvotes{downvoteCounter}")]
         public ActionResult UpdateDownvoteCounter(int postId, int downvoteCounter)
         {
             if (postDao.GetPost(postId) != null)

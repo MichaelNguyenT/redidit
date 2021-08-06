@@ -39,10 +39,9 @@ namespace Capstone.Controllers
         public ActionResult<Forum> CreateForum(Forum forum)
         {
             var returnForum = forumDao.CreateForum(forum.ForumTitle);
-<<<<<<< HEAD
+            
             //forumDao.promoteToModerator();
-=======
->>>>>>> 4586955c1539a9ad5a7adcb9343b35692bae086c
+            //User.Identity.Name
             if (returnForum != null)
             {
                 return Ok(returnForum);
@@ -63,7 +62,7 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
-        [HttpPost("/favorites/{userId}")]
+        [HttpPost("/favorites/user{userId}/forum{forumId}")]
         public IActionResult AddFavorite(int userId, int forumId)
         {
             forumDao.AddFavoriteForum(userId, forumId);
