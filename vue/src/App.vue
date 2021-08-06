@@ -4,7 +4,6 @@
       <v-switch
           v-model="$vuetify.theme.dark"
           label="Light/Dark Mode"
-          persistent-hint
         ></v-switch>
       <v-card elevation="3">
       <v-app-bar flat>
