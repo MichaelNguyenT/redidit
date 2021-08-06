@@ -136,17 +136,23 @@ namespace Capstone.DAO
             int newUp = 0;
             int newDown = 0;
             Post post = GetPost(postId);
-            if (CheckUserVoteStatus(userId, postId) == 0)
+            int voteStatus = CheckUserVoteStatus(userId, postId); //voteStatus: 0 = downvote, 1 = upvote, 2 = default state
+
+            if (voteStatus == 0)
             {
                 newUp = post.UpvoteCounter + 1;
-                //newDown - 1
-
+                newDown = post.DownvoteCounter - 1;
             }
-            else if(CheckUserVoteStatus(userId, postId) == 1)
+            else if(voteStatus == 1)
             {
                 newUp = post.UpvoteCounter - 1;
+                newDown = post.DownvoteCounter;
             }
-            //if voteStatus is 2, newUp + 1
+            else if (voteStatus == 2)
+            {
+                newUp = post.UpvoteCounter + 1;
+                newDown = post.DownvoteCounter;
+            }
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -154,10 +160,11 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("UPDATE posts " +
-                        "SET upvote_counter = @upvoteCounter " +
-                        "WHERE post_id = @postId", conn);
+                                                    "SET upvote_counter = @upvoteCounter, " +
+                                                    "downvote_counter = @downvoteCounter "+
+                                                    "WHERE post_id = @postId", conn);
                     cmd.Parameters.AddWithValue("@upvoteCounter", newUp);
-                    //downvoteCounter
+                    cmd.Parameters.AddWithValue("@downvoteCounter", newDown);
                     cmd.Parameters.AddWithValue("@postId", postId);
                     cmd.ExecuteNonQuery();
                 }
@@ -168,8 +175,28 @@ namespace Capstone.DAO
             }
         }
 
-        public void UpdateDownvoteCounter(int postId, int downvoteCounter)
+        public void UpdateDownvoteCounter(int postId, int userId)
         {
+            int newUp = 0;
+            int newDown = 0;
+            Post post = GetPost(postId);
+            int voteStatus = CheckUserVoteStatus(userId, postId); //voteStatus: 0 = downvote, 1 = upvote, 2 = default state
+
+            if (voteStatus == 0)
+            {
+                newUp = post.UpvoteCounter;
+                newDown = post.DownvoteCounter - 1;
+            }
+            else if (voteStatus == 1)
+            {
+                newUp = post.UpvoteCounter - 1;
+                newDown = post.DownvoteCounter + 1;
+            }
+            else if (voteStatus == 2)
+            {
+                newUp = post.UpvoteCounter;
+                newDown = post.DownvoteCounter + 1;
+            }
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -177,9 +204,11 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("UPDATE posts " +
-                        "SET downvote_counter = @downvoteCounter " +
-                        "WHERE post_id = @postId", conn);
-                    cmd.Parameters.AddWithValue("@downvoteCounter", downvoteCounter);
+                                                    "SET upvote_counter = @upvoteCounter, " +
+                                                    "downvote_counter = @downvoteCounter " +
+                                                    "WHERE post_id = @postId", conn);
+                    cmd.Parameters.AddWithValue("@upvoteCounter", newUp);
+                    cmd.Parameters.AddWithValue("@downvoteCounter", newDown);
                     cmd.Parameters.AddWithValue("@postId", postId);
                     cmd.ExecuteNonQuery();
                 }
@@ -199,15 +228,15 @@ namespace Capstone.DAO
                     conn.Open();
                     SqlCommand cmd = new SqlCommand("INSERT INTO user_vote_posts (user_id, post_id, vote) " +
                                                     "VALUES (@userId, @postId, @vote)", conn);
-                    cmd.Parameters.AddWithValue("@userId", postId);
-                    cmd.Parameters.AddWithValue("@postId", userId);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@postId", postId);
                     cmd.Parameters.AddWithValue("@vote", upOrDown);
                     cmd.ExecuteNonQuery();
                 }
             }
             catch (Exception e)
             {
-                
+                throw;
             }
         }
 
@@ -227,7 +256,29 @@ namespace Capstone.DAO
             }
             catch (Exception e)
             {
+                throw;
+            }
+        }
 
+        public int CheckForUserVote(int userId, int postId)
+        {
+            try
+            {
+                using(SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand("SELECT COUNT(user_id) " +
+                                                    "FROM user_vote_posts " +
+                                                    "WHERE user_id = @userId AND post_id = @postId", conn);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    int userHasVoted = Convert.ToInt32(cmd.ExecuteScalar());
+                    return userHasVoted;
+                }
+            }
+            catch
+            {
+                throw;
             }
         }
 
@@ -254,6 +305,29 @@ namespace Capstone.DAO
                 }
             }
             catch (Exception e)
+            {
+                throw;
+            }
+        }
+
+        public void UpdateUserVoteStatus(int userId, int postId, int voteStatus)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("UPDATE user_vote_posts " +
+                                                    "SET vote = @voteStatus " +
+                                                    "WHERE user_id = @userId AND post_id = @postId", conn);
+                    cmd.Parameters.AddWithValue("@userId", userId);
+                    cmd.Parameters.AddWithValue("@postId", postId);
+                    cmd.Parameters.AddWithValue("@voteStatus", voteStatus);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
             {
                 throw;
             }

@@ -70,30 +70,50 @@ namespace Capstone.Controllers
             return NoContent();
         }
 
-        [HttpPut("/post{postId}/upvotes{upvoteCounter}")]
+        [HttpPut("/upvotes{postId}")]
         public ActionResult UpdateUpvoteCounter(int postId) //front end only needs to pass postId
         {
-            int currentUserId = GetUserId();
-
-            //if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == false)
+              int currentUserId = GetUserId();
+              if (postDao.GetPost(postId) != null)
             {
-                postDao.UpdateUpvoteCounter(postId, currentUserId);
-                return Ok();
-            }
-            //else if (postDao.GetPost(postId) != null && postDao.CheckUserVoteStatus(GetUserId(), postId) == true)
-            {
-
+                int userHasVote = postDao.CheckForUserVote(currentUserId, postId);
+                if(userHasVote == 0)
+                {
+                    postDao.AddVoteToVoteTable(postId, currentUserId, 2);
+                    postDao.UpdateUpvoteCounter(postId, currentUserId);
+                    postDao.UpdateUserVoteStatus(currentUserId, postId, 1);
+                    return Ok();
+                }
+                else
+                {
+                    postDao.UpdateUpvoteCounter(postId, currentUserId);
+                    postDao.UpdateUserVoteStatus(currentUserId, postId, 1);
+                    return Ok();
+                }
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated."  });
         }
 
-        [HttpPut("/post{postId}/downvotes{downvoteCounter}")]
+        [HttpPut("/downvotes{postId}")]
         public ActionResult UpdateDownvoteCounter(int postId, int downvoteCounter)
         {
+            int currentUserId = GetUserId();
             if (postDao.GetPost(postId) != null)
             {
-                postDao.UpdateDownvoteCounter(postId, downvoteCounter);
-                return Ok();
+                int userHasVote = postDao.CheckForUserVote(currentUserId, postId);
+                if (userHasVote == 0)
+                {
+                    postDao.AddVoteToVoteTable(postId, currentUserId, 2);
+                    postDao.UpdateDownvoteCounter(postId, currentUserId);
+                    postDao.UpdateUserVoteStatus(currentUserId, postId, 0);
+                    return Ok();
+                }
+                else
+                {
+                    postDao.UpdateDownvoteCounter(postId, currentUserId);
+                    postDao.UpdateUserVoteStatus(currentUserId, postId, 0);
+                    return Ok();
+                }
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated." });
         }

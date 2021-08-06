@@ -15,10 +15,12 @@ namespace Capstone.Controllers
     public class ForumController : ControllerBase
     {
         private readonly IForumDao forumDao;
+        private readonly IUserDao userDao;
 
-        public ForumController(IForumDao _forumDao)
+        public ForumController(IForumDao _forumDao, IUserDao _userDao)
         {
             forumDao = _forumDao;
+            userDao = _userDao;
         }
 
         [AllowAnonymous]
@@ -76,10 +78,18 @@ namespace Capstone.Controllers
         }
 
         [HttpPost("/promote/user{userId}/forum{forumId}")]
-        [Authorize(Roles = "admin")]
         public ActionResult PromoteUserToModerator(int userId, int forumId)
         {
-            forumDao.PromoteToModerator(userId, forumId);
+            int currentUserId = GetUserId();
+            if (userDao.CheckAdmin(currentUserId) || forumDao.CheckUserModeratorForum(currentUserId, forumId))
+            {
+                forumDao.PromoteToModerator(userId, forumId);
+            }
+            else
+            {
+                return Unauthorized();
+            }
+            
             if (forumDao.CheckUserModeratorForum(userId, forumId))
             {
                 return Ok();

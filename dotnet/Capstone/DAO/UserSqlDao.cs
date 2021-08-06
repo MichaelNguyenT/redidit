@@ -102,6 +102,25 @@ namespace Capstone.DAO
             return isAdmin;
         }
 
+        public void PromoteToAdmin(int userId)
+        {
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("", conn);
+                    cmd.Parameters.AddWithValue("", userId);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
         private User GetUserFromReader(SqlDataReader reader)
         {
             User u = new User()

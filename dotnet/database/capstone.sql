@@ -63,7 +63,7 @@ CREATE TABLE posts (
 CREATE TABLE user_vote_posts(
 user_id int NOT NULL,
 post_id int NOT NULL,
-vote BIT NOT NULL,
+vote int NOT NULL,
 FOREIGN KEY (user_id) REFERENCES users (user_id),
 FOREIGN KEY (post_id) REFERENCES posts (post_id),
 UNIQUE (user_id, post_id)
