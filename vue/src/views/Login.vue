@@ -40,11 +40,11 @@
       </v-text-field>
        </v-col>
       </v-row>
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
-      <button type="submit" class="secondary--text">Sign in</button>
-      <forum-carousel />
+      <router-link :to="{ name: 'register' }">Need an account? </router-link>
+      <button type="submit" class="secondary--text">| Sign in</button>
      </v-container>
     </v-form>
+    <forum-carousel />
   </div>
 </template>
 
