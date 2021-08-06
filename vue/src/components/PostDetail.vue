@@ -36,7 +36,8 @@
                 </v-icon>
                 Eww {{ counterDown }}
             </v-chip>
-            <v-chip class="ma-1">See all replies...</v-chip>
+            <v-chip class="ma-1" @click.native="displayReplies">See all replies...</v-chip>
+            
             <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
                     <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
@@ -53,9 +54,10 @@
         </v-card>
         </div>
         </v-row>
-       </v-container>
-      <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:replies="reply"></replies>
+       </v-container> 
+     <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
     </div>
+    
 </template>
 
 <script>
@@ -68,12 +70,12 @@ import Replies from '../components/Replies.vue'
 export default {
   components: { Replies },
     name: 'post-details',
-    props: ['replies'],
     data() {
         return {
             posts: [],
             counterUp: 0,
             counterDown: 0,
+            replies: [],
             reply: {
                 postId: this.postID,
                 content: '',
@@ -95,6 +97,12 @@ export default {
                          this.reply = { postId: '', username: '', content: ''}
                     }
                  })
+        },
+         displayReplies() {
+            postService.getReplies().then(
+            (resp) => {
+                this.replies = resp.data;
+            })
         },
         addCounter(operand){
             this.counterUp += operand;
