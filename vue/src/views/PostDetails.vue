@@ -2,7 +2,7 @@
     <div class="secondary">
         <post-detail />
         <replies />
-        </div>
+    </div>
 </template>
 
 <script>

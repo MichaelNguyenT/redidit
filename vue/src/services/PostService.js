@@ -19,10 +19,10 @@ export default {
     },
 
     updateUpvote(postId, upvoteCounter) {
-      return http.put(`/upvote-counter/${1}`, { postId : postId, upvoteCounter : upvoteCounter }) //takes postId at end of route
+      return http.put(`/post${postId}/upvotes${upvoteCounter}`) //takes current postId and new number of total upvotes
     },
 
     updateDownvote(postId, downvoteCounter) {
-      return http.put(`/downvote-counter/${1}`, { postId : postId, downvoteCounter : downvoteCounter })
+      return http.put(`/post${postId}/downvotes${downvoteCounter}`)
     }
 }

@@ -60,7 +60,7 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
-        [HttpPost("/favorites/{userId}")]
+        [HttpPost("/favorites/user{userId}/forum{forumId}")]
         public IActionResult AddFavorite(int userId, int forumId)
         {
             forumDao.AddFavoriteForum(userId, forumId);
