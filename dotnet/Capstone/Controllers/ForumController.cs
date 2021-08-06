@@ -40,7 +40,7 @@ namespace Capstone.Controllers
         {
             var returnForum = forumDao.CreateForum(forum.ForumTitle);
             
-            //forumDao.promoteToModerator();
+            forumDao.PromoteToModerator(GetUserId(), forum.ForumId);
             //User.Identity.Name
             if (returnForum != null)
             {
@@ -74,6 +74,32 @@ namespace Capstone.Controllers
                 return Ok();
             }
             return BadRequest(new { message = "An error occurred: The forum was not correctly added to favorites." });
+        }
+
+        [HttpPost("/promote/user{userId}/forum{forumId}")]
+        [Authorize(Roles = "admin")]
+        public ActionResult PromoteUserToModerator(int userId, int forumId)
+        {
+            forumDao.PromoteToModerator(userId, forumId);
+            if (forumDao.CheckUserModeratorForum(userId, forumId))
+            {
+                return Ok();
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("/forum{forumId}/delete")]
+        [Authorize(Roles = "admin")]
+        public ActionResult DeleteForum(int forumId)
+        {
+            var returnForum = forumDao.GetForum(forumId);
+
+            if (returnForum != null)
+            {
+                forumDao.DeleteForum(forumId);
+                return Ok();
+            }
+            return BadRequest(new { message = "An error occurred: The forum could not be deleted." });
         }
     }
 }
