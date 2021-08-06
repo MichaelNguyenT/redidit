@@ -15,7 +15,7 @@ axios.defaults.baseURL = process.env.VUE_APP_REMOTE_API;
 
 const opts = {
   theme: {
-    dark: false,
+    dark: true,
     themes: {
       light: {
         primary: '#d300c7',
