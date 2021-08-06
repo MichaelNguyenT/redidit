@@ -24,5 +24,9 @@ export default {
 
     updateDownvote(postId, downvoteCounter) {
       return http.put(`/post${postId}/downvotes${downvoteCounter}`)
+    },
+
+    getForum() {
+      return http.get('/')
     }
 }

@@ -44,15 +44,17 @@
       <button type="submit" class="secondary--text">| Sign in</button>
      </v-container>
     </v-form>
+    <forum-carousel />
   </div>
 </template>
 
 <script>
+import ForumCarousel from '../components/ForumCarousel.vue';
 import authService from "../services/AuthService";
 
 export default {
   name: "login",
-  components: {},
+  components: {ForumCarousel},
   data() {
     return {
       user: {

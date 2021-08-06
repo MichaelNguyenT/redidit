@@ -68,7 +68,7 @@ import Replies from '../components/Replies.vue'
 
 
 export default {
-  components: { Replies },
+    components: { Replies },
     name: 'post-details',
     data() {
         return {

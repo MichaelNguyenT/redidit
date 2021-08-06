@@ -21,5 +21,6 @@
       </v-card>
     </div>
     <router-view />
+    
   </v-app>
 </template>
