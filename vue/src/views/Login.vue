@@ -42,17 +42,19 @@
       </v-row>
       <router-link :to="{ name: 'register' }">Need an account?</router-link>
       <button type="submit" class="secondary--text">Sign in</button>
+      <forum-carousel />
      </v-container>
     </v-form>
   </div>
 </template>
 
 <script>
+import ForumCarousel from '../components/ForumCarousel.vue';
 import authService from "../services/AuthService";
 
 export default {
   name: "login",
-  components: {},
+  components: {ForumCarousel},
   data() {
     return {
       user: {
