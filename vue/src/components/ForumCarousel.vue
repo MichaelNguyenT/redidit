@@ -2,9 +2,12 @@
     <v-carousel>
         <v-carousel-item v-for="forum in forums" v-bind:key="forum.forumId">
             <v-row class="fill-height" align="center" justify="center">
-                <div>
-                    {{ forum.forumTitle }}
-                </div>
+                <v-subtitle>
+                    {{ forum.forumTitle }}|
+                </v-subtitle>
+                <v-subtitle>
+                    <router-link  v-bind:to="{name: 'post-details' }" class="secondary--text"> Demo Here</router-link>
+                </v-subtitle>
             </v-row>
         </v-carousel-item>    
     </v-carousel>
