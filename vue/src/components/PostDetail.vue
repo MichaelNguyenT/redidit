@@ -23,21 +23,21 @@
             <v-card-text>{{ post.content }}</v-card-text>
             </v-col>
             <v-divider class="mt-0 mx-4"></v-divider>
-            <v-col class="d-flex justify-end mb-1">
-            <v-chip class="ma-1" @click.native="addCounter(1)">
+            <v-col class="d-flex mb-1">
+            <v-chip class="ma-1 d-flex justify-start" @click.native="addCounter(1)">
                  <v-icon medium>
                      mdi-duck 
                 </v-icon>
                 Yes +{{ counterUp }}
             </v-chip>
-            <v-chip class="ma-1" @click.native="subtractCounter(-1)">
+            <v-chip class="ma-1 d-flex justify-start " @click.native="subtractCounter(-1)">
                  <v-icon medium>
                      mdi-beehive-off-outline 
                 </v-icon>
                 Eww {{ counterDown }}
             </v-chip>
-            <v-chip class="ma-1" @click.native="displayReplies">See all replies...</v-chip>
-            
+            <v-chip class="ma-1 d-flex justify-end" @click.native="displayReplies">See Replies</v-chip>
+            <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
             <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
                     <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
@@ -103,6 +103,9 @@ export default {
             (resp) => {
                 this.replies = resp.data;
             })
+        },
+        hideReplies() {
+            this.replies = [];
         },
         addCounter(operand){
             this.counterUp += operand;
