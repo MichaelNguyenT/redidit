@@ -1,9 +1,6 @@
 <template>
     <div>
-       <v-container grid-list-xl class="d-flex">
-        <v-row>
-        <div v-for="post in posts" v-bind:key="post.postId" fluid style="width: 100%">
-        <v-card elevation="3" outlined shaped class="my-4">
+          <v-card elevation="3" outlined shaped class="my-4">
             <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
             <v-col class="d-flex justify-start mb-1 py-0">
              <v-avatar>
@@ -52,26 +49,18 @@
             </v-dialog>
             </v-col>
         </v-card>
-         <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
-        </div>
-        </v-row>
-       </v-container> 
+    <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
     </div>
-    
 </template>
 
 <script>
 
 import moment from 'moment'
-import postService from '../services/PostService.js'
+//import postService from '../services/PostService.js'
 import Replies from '../components/Replies.vue'
-
-//what needs to stay in postdetail, vs what needs to be moved over to TopPost? I copied everything over
-//and PostDetail's only function should end up being "gets all posts in a given forum", correct?
-
 export default {
     components: { Replies },
-    name: 'post-details',
+    name: 'single-post',
     data() {
         return {
             posts: [],
@@ -122,6 +111,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style>
