@@ -18,12 +18,12 @@ export default {
       return http.post('/post', reply)
     },
 
-    updateUpvote(postId, upvoteCounter) {
-      return http.put(`/post${postId}/upvotes${upvoteCounter}`) //takes current postId and new number of total upvotes
+    updateUpvote(postId) {
+      return http.put(`/upvotes${postId}`) //takes postId, all other logic handled in back end
     },
 
-    updateDownvote(postId, downvoteCounter) {
-      return http.put(`/post${postId}/downvotes${downvoteCounter}`)
+    updateDownvote(postId) {
+      return http.put(`/downvotes${postId}`)
     },
 
     getForum() {
