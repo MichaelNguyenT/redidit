@@ -1,9 +1,9 @@
 <template>
 <v-card class="mx-auto">
-    <v-toobar>
+    <v-toolbar>
         <v-toolbar-title class="font-weight-bold secondary h1 ma-8 pa-3">Top Forums Now</v-toolbar-title>
         <v-spacer></v-spacer>
-    </v-toobar>
+    </v-toolbar>
             <v-carousel>
                 <v-carousel-item v-for="forum in forums" v-bind:key="forum.forumId">
                  <v-row class="fill-height" align="center" justify="center">

@@ -1,12 +1,14 @@
 <template>
     <div>
-          <v-card elevation="3" outlined shaped class="my-4">
+    <v-container grid-list-xl>
+        <v-row>
+          <v-card elevation="3" outlined shaped class="my-6">
             <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
             <v-col class="d-flex justify-start mb-1 py-0">
              <v-avatar>
                     <img src="https://images-ext-2.discordapp.net/external/AdJWzJfIdpBJppSLXDGvxWy5Pgs9r4K5IczkHsiLU1g/https/i.ytimg.com/vi/GNc_ZKCmjJ8/maxresdefault.jpg?width=786&height=442">
                 </v-avatar>
-            <v-card-subtitle>{{post.username}}</v-card-subtitle>
+            <v-card-subtitle>{{ post.username }}</v-card-subtitle>
             </v-col>
             <v-card-subtitle class="pa-md-1">{{post.postedDate | moment}}</v-card-subtitle>
             <v-divider class="mt-0 mx-4"></v-divider>
@@ -49,18 +51,22 @@
             </v-dialog>
             </v-col>
         </v-card>
-    <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
+   </v-row>   
+    </v-container>
+      <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
     </div>
 </template>
 
 <script>
 
 import moment from 'moment'
-//import postService from '../services/PostService.js'
+import postService from '../services/PostService.js'
 import Replies from '../components/Replies.vue'
+
 export default {
     components: { Replies },
     name: 'single-post',
+    props: ['post'],
     data() {
         return {
             posts: [],
@@ -73,12 +79,6 @@ export default {
                 username: this.username
             }
         }
-    },
-    created() {
-        postService.getPost(this.$route.params.forumId).then(
-            (resp) => {
-                this.posts = resp.data;
-            })
     },
     methods: {
         addReply() {
