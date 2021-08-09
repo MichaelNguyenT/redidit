@@ -36,7 +36,7 @@
                 </v-icon>
                 Eww {{ counterDown }}
             </v-chip>
-            <v-chip class="ma-1 d-flex justify-end" @click.native="displayReplies">See Replies</v-chip>
+            <v-chip class="ma-1 d-flex justify-end" @click.native="displayReplies(post.postId)">See Replies</v-chip>
             <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
             <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
@@ -69,7 +69,6 @@ import Replies from '../components/Replies.vue'
 
 export default {
     components: { Replies },
-    props: ['forum'],
     name: 'post-details',
     data() {
         return {
@@ -85,7 +84,7 @@ export default {
         }
     },
     created() {
-        postService.getPost(this.forumId).then(
+        postService.getPost(this.$route.params.forumId).then(
             (resp) => {
                 this.posts = resp.data;
             })
@@ -99,8 +98,8 @@ export default {
                     }
                  })
         },
-         displayReplies(replyId) {
-            postService.getReplies(replyId).then(
+         displayReplies(postId) {
+            postService.getReplies(postId).then(
             (resp) => {
                 this.replies = resp.data;
             })

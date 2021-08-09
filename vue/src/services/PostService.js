@@ -6,12 +6,12 @@ const http = axios.create({
 
 export default {
 
-    getPost() {
-        return http.get(`/forum/${1}`)
+    getPost(forumId) {
+        return http.get(`/forum/${forumId}`)
       },
 
-    getReplies() {
-      return http.get(`/post/${1}`)
+    getReplies(postId) {
+      return http.get(`/post/${postId}`)
     },
 
     addReply(reply) {
