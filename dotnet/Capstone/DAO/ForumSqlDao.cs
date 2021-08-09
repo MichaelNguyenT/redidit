@@ -110,12 +110,14 @@ namespace Capstone.DAO
                     conn.Open();
 
                     SqlCommand cmd = new SqlCommand("BEGIN TRANSACTION " +
-                                                        "DELETE FROM replies " +
-                                                        "WHERE post_id = @postId " +
-                                                        "DELETE FROM posts " +
-                                                        "WHERE post_id = @postId " +
-                                                        "DELETE FROM forums_list " +
-                                                        "WHERE forum_id = @forum_id " +
+                                                        "DELETE FROM replies WHERE post_id IN " + //delete replies in forum (tied to posts)
+                                                            "(SELECT post_id FROM posts WHERE forum_id = @forum_id) " +
+                                                        "DELETE FROM user_vote_posts WHERE post_id IN " + //delete votes in forum (tied to posts)
+                                                            "(SELECT post_id FROM posts WHERE forum_id = @forum_id) " +
+                                                        "DELETE FROM posts WHERE forum_id = @forum_id " + //delete posts in forum
+                                                        "DELETE FROM user_favorite_forum WHERE forum_id = @forum_id " + //delete favorites in forum
+                                                        "DELETE FROM user_moderator_forum WHERE forum_id = @forum_id " + //delete mods in forum
+                                                        "DELETE FROM forums_list WHERE forum_id = @forum_id " + //finally deletes the forum
                                                     "COMMIT TRANSACTION", conn);
                     cmd.Parameters.AddWithValue("@forum_id", forumId);
                     cmd.ExecuteNonQuery();
