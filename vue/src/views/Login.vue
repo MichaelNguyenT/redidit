@@ -45,16 +45,22 @@
      </v-container>
     </v-form>
     <forum-carousel />
+    <top-post />
+
   </div>
 </template>
 
 <script>
 import ForumCarousel from '../components/ForumCarousel.vue';
 import authService from "../services/AuthService";
+import TopPost from "../components/TopPost.vue"
 
 export default {
   name: "login",
-  components: {ForumCarousel},
+  components: {
+    ForumCarousel,
+    TopPost
+    },
   data() {
     return {
       user: {

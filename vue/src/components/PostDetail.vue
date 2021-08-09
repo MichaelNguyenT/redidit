@@ -2,7 +2,7 @@
     <div>
        <v-container grid-list-xl class="d-flex">
         <v-row>
-        <div v-for="post in posts" v-bind:key="post.postId">
+        <div v-for="post in posts" v-bind:key="post.postId" fluid style="width: 100%">
         <v-card elevation="3" outlined shaped class="my-4">
             <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
             <v-col class="d-flex justify-start mb-1 py-0">
@@ -52,10 +52,10 @@
             </v-dialog>
             </v-col>
         </v-card>
+         <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
         </div>
         </v-row>
        </v-container> 
-     <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
     </div>
     
 </template>
@@ -69,6 +69,7 @@ import Replies from '../components/Replies.vue'
 
 export default {
     components: { Replies },
+    props: ['forum'],
     name: 'post-details',
     data() {
         return {
@@ -77,14 +78,14 @@ export default {
             counterDown: 0,
             replies: [],
             reply: {
-                postId: this.postID,
+                postId: this.postId,
                 content: '',
                 username: this.username
             }
         }
     },
     created() {
-        postService.getPost().then(
+        postService.getPost(this.forumId).then(
             (resp) => {
                 this.posts = resp.data;
             })
@@ -98,8 +99,8 @@ export default {
                     }
                  })
         },
-         displayReplies() {
-            postService.getReplies().then(
+         displayReplies(replyId) {
+            postService.getReplies(replyId).then(
             (resp) => {
                 this.replies = resp.data;
             })
