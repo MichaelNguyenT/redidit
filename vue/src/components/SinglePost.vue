@@ -1,8 +1,8 @@
 <template>
     <div>
     <v-container grid-list-xl>
-        <v-row>
-          <v-card elevation="3" outlined shaped class="my-6">
+        <v-row >
+          <v-card elevation="3" outlined shaped class="my-6" fluid style="width: 100%">
             <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
             <v-col class="d-flex justify-start mb-1 py-0">
              <v-avatar>
@@ -53,7 +53,7 @@
         </v-card>
    </v-row>   
     </v-container>
-      <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
+    <replies v-for="reply in replies" v-bind:key="reply.replyId" v-bind:reply="reply"></replies>
     </div>
 </template>
 

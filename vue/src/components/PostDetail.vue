@@ -1,6 +1,6 @@
 <template>
     <div>
-        <single-post v-for="post in posts" v-bind:key="post.postId" v-bind:post="post" fluid style="width: 100%"></single-post> 
+        <single-post v-for="post in posts" v-bind:key="post.postId" v-bind:post="post"></single-post> 
     </div>
     
 </template>
@@ -16,12 +16,6 @@ export default {
   components: { SinglePost },
     name: 'post-details',
     props: ['posts'],
-//   created() {
-//         postService.getPost(this.$route.params.forumId).then(
-//             (resp) => {
-//                 this.posts = resp.data;
-//             })
-//     },
 }
 </script>
 

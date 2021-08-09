@@ -1,7 +1,14 @@
 <template>
     <div class="secondary">
+        <h1 align="center">Forum Title</h1>
+        <v-row align="center" justify="center" no gutters>
+            
+            <v-btn class="pa-10 ma-10">Most Recent</v-btn>
+            <v-btn class="pa-10 ma-10">Most Popular</v-btn>
+        </v-row>
         <post-detail v-bind:posts="posts"/>
         <replies />
+       
     </div>
 </template>
 
