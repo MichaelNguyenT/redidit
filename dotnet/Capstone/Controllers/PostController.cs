@@ -41,6 +41,20 @@ namespace Capstone.Controllers
             return NotFound();
         }
 
+        [AllowAnonymous]
+        [HttpGet("/posts/{postId}")]
+        public ActionResult<Post> GetPost(int postId)
+        {
+            Post post = new Post();
+            post = postDao.GetPost(postId);
+
+            if(post != null)
+            {
+                return Ok(post);
+            }
+            return NotFound();
+        }
+
         [HttpPost("/forum")]
         public ActionResult<Post> CreatePost(Post post)
         {

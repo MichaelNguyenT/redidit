@@ -6,6 +6,10 @@ export default {
         return axios.get(`/forum/${forumId}`)
       },
 
+    getSinglePost(postId){
+      return axios.get(`/posts/${postId}`)
+    },
+
     getReplies(postId) {
       return axios.get(`/post/${postId}`)
     },
