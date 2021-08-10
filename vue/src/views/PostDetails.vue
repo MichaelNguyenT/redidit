@@ -1,6 +1,6 @@
 <template>
     <div class="secondary">
-        <h1 align="center">Forum Title</h1>
+        <h1 align="center">{{ $store.state.currentForum }}</h1>
         <v-row align="center" justify="center" no gutters>
             
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
@@ -17,7 +17,7 @@
 
 <script>
 import Replies from "../components/Replies.vue"
-import PostDetail from "../components/PostDetail.vue"
+import PostDetail from "../components/SingleForum.vue"
 import postService from '../services/PostService.js'
 
 export default {
@@ -29,6 +29,7 @@ export default {
     data() {
         return {
             posts: [], 
+            forums: [],
         }
         
     },
