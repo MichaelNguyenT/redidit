@@ -6,7 +6,7 @@
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
             <v-btn class="pa-10 ma-10">Most Popular</v-btn>
             <v-btn class="pa-10 ma-10">Love Forum</v-btn>
-            <v-btn class="pa-10 ma-10">Add Post</v-btn>
+            <v-btn class="pa-10 ma-10"><add-post>Add Post</add-post></v-btn>
             <v-btn class="pa-10 ma-10">Delete Forum</v-btn>
         </v-row>
         <post-detail v-bind:posts="posts"/>
@@ -19,12 +19,14 @@
 import Replies from "../components/Replies.vue"
 import PostDetail from "../components/PostDetail.vue"
 import postService from '../services/PostService.js'
+import AddPost from "../components/AddPost.vue"
 
 export default {
     name: "post-details",
     components: {
         PostDetail,
-        Replies
+        Replies,
+        AddPost
     },
     data() {
         return {

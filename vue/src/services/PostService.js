@@ -10,6 +10,10 @@ export default {
         return http.get(`/forum/${forumId}`)
       },
 
+    addPost(post) {
+      return http.post('/forum', post)
+    },
+
     getReplies(postId) {
       return http.get(`/post/${postId}`)
     },
