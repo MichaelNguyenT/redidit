@@ -1,6 +1,6 @@
 <template>
     <div class="secondary">
-        <h1 align="center">Forum Title</h1>
+        <h1 align="center">{{ $store.state.currentForum }}</h1>
         <v-row align="center" justify="center" no gutters>
             
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
@@ -8,6 +8,9 @@
             <v-btn class="pa-10 ma-10">Love Forum</v-btn>
             <v-btn class="pa-10 ma-10"><add-post>Add Post</add-post></v-btn>
             <v-btn class="pa-10 ma-10">Delete Forum</v-btn>
+            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Love Forum</v-btn>
+            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Add Post</v-btn>
+            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Delete Forum</v-btn>
         </v-row>
         <post-detail v-bind:posts="posts"/>
         <replies />
@@ -17,7 +20,7 @@
 
 <script>
 import Replies from "../components/Replies.vue"
-import PostDetail from "../components/PostDetail.vue"
+import PostDetail from "../components/SingleForum.vue"
 import postService from '../services/PostService.js'
 import AddPost from "../components/AddPost.vue"
 
@@ -31,6 +34,7 @@ export default {
     data() {
         return {
             posts: [], 
+            forums: [],
         }
         
     },

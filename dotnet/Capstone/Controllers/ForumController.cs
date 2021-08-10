@@ -41,7 +41,7 @@ namespace Capstone.Controllers
         public ActionResult<Forum> CreateForum(Forum forum)
         {
             var returnForum = forumDao.CreateForum(forum.ForumTitle);        
-            forumDao.PromoteToModerator(GetUserId(), forum.ForumId);
+            forumDao.PromoteToModerator(GetUserId(), returnForum.ForumId);
 
             if (returnForum != null)
             {
@@ -95,6 +95,14 @@ namespace Capstone.Controllers
                 return Ok();
             }
             return NoContent();
+        }
+
+        //NOT IMPLEMENTED YET~~~~~~~~~~~~~~~~~
+        [HttpPut("/promoteAdmin/{userId}")]
+        [Authorize(Roles = "admin")]
+        public IActionResult PromoteToAdmin(int userId)
+        {
+            return BadRequest();
         }
 
         [HttpDelete("/forum{forumId}/delete")]

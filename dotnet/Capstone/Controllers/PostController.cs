@@ -81,13 +81,11 @@ namespace Capstone.Controllers
                 {
                     postDao.AddVoteToVoteTable(postId, currentUserId, 2);
                     postDao.UpdateUpvoteCounter(postId, currentUserId);
-                    postDao.UpdateUserVoteStatus(currentUserId, postId, 1);
                     return Ok();
                 }
                 else
                 {
                     postDao.UpdateUpvoteCounter(postId, currentUserId);
-                    postDao.UpdateUserVoteStatus(currentUserId, postId, 1);
                     return Ok();
                 }
             }
@@ -105,13 +103,11 @@ namespace Capstone.Controllers
                 {
                     postDao.AddVoteToVoteTable(postId, currentUserId, 2);
                     postDao.UpdateDownvoteCounter(postId, currentUserId);
-                    postDao.UpdateUserVoteStatus(currentUserId, postId, 0);
                     return Ok();
                 }
                 else
                 {
                     postDao.UpdateDownvoteCounter(postId, currentUserId);
-                    postDao.UpdateUserVoteStatus(currentUserId, postId, 0);
                     return Ok();
                 }
             }

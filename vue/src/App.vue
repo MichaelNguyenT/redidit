@@ -14,10 +14,10 @@
   src="https://i.ibb.co/MnvSs9j/Redidit-mockup-logo-6-removebg-preview.png" alt="Redidit-mockup-logo-6-removebg-preview" border="0"
 ></v-img>
       </v-toolbar-title><v-spacer></v-spacer>
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp; | &nbsp;
-      <router-link v-bind:to="{ name: 'login' }">Login</router-link>&nbsp; | &nbsp;
-      <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      <router-link v-bind:to="{ name: 'myaccount' }">MyAccount</router-link>
+      <router-link class="pa-2" v-bind:to="{ name: 'home' }">Home</router-link>
+      <router-link class="pa-2" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
+      <router-link class="pa-2" v-bind:to="{ name: 'myaccount'}" v-if="$store.state.token != ''">MyAccount</router-link>
+      <router-link class="pa-2" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       </v-app-bar>
       </v-card>
     </div>

@@ -102,6 +102,7 @@ namespace Capstone.DAO
             return isAdmin;
         }
 
+        //NOT IMPLEMENTED YET~~~~~~~~~~~~~
         public void PromoteToAdmin(int userId)
         {
             try

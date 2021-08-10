@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import SinglePost from '../components/SinglePost.vue'
+import SinglePost from './SinglePost.vue'
+import postService from '../services/PostService.js'
 
 
 //what needs to stay in postdetail, vs what needs to be moved over to TopPost? I copied everything over
@@ -16,6 +17,12 @@ export default {
   components: { SinglePost },
     name: 'post-details',
     props: ['posts'],
+    created() {
+        postService.getForum().then(
+            (resp) => {
+                this.forums = resp.data;
+            })
+    },
 }
 </script>
 
