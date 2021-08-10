@@ -21,15 +21,13 @@
 <script>
 import Replies from "../components/Replies.vue"
 import PostDetail from "../components/SingleForum.vue"
-import postService from '../services/PostService.js'
-import AddPost from "../components/AddPost.vue"
+import postService from "../services/PostService.js"
 
 export default {
     name: "post-details",
     components: {
         PostDetail,
-        Replies,
-        AddPost
+        Replies
     },
     data() {
         return {
