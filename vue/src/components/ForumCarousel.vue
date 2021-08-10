@@ -8,7 +8,7 @@
                      <h1 class="ma-2">
                         <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
                     </h1>
-                     <v-chip class="align-end ma-4 pa-6">Love</v-chip>
+                     <v-chip v-if="$store.state.token != ''" class="align-end ma-4 pa-6">Love</v-chip>
                     </v-col>
                 </v-row>
             </v-carousel-item>    

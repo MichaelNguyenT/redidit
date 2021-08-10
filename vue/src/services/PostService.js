@@ -9,6 +9,10 @@ export default {
     getSinglePost(postId){
       return axios.get(`/posts/${postId}`)
     },
+    
+    addPost(post) {
+      return http.post('/forum', post)
+    },
 
     getReplies(postId) {
       return axios.get(`/post/${postId}`)
