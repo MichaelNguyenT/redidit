@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Capstone.Controllers
 {
-    [Route("[controller]")]  //route is URL + 'login'
+    [Route("/")] 
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace Capstone.Controllers
             userDao = _userDao;
         }
 
-        [HttpPost]
+        [HttpPost("/login")]
         public IActionResult Authenticate(LoginUser userParam)
         {
             // Default to bad username/password message
