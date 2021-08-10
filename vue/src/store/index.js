@@ -20,7 +20,9 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    currentForum: ''
+    currentForum: '',
+    upvoteCounter: 0,
+    downvoteCounter: 0
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -41,6 +43,6 @@ export default new Vuex.Store({
     },
     SET_CURRENT_FORUM(state, forumName) {
       state.currentForum = forumName;
-    }
+    },
   }
 })
