@@ -23,13 +23,13 @@
                 </v-col>
                 <v-divider class="mt-0 mx-4"></v-divider>
                 <v-col class="d-flex justify-end mb-1">
-                    <v-chip class="ma-1" @click.native="addCounter(post.postId)">
+                    <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="addCounter(post.postId)">
                          <v-icon medium>
                               mdi-duck 
                         </v-icon>
                             Yes {{ post.upvoteCounter }}
                         </v-chip>
-                    <v-chip class="ma-1" @click.native="subtractCounter(post.postId)">
+                    <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="subtractCounter(post.postId)">
                          <v-icon medium>
                             mdi-beehive-off-outline 
                         </v-icon>
@@ -39,7 +39,7 @@
                     <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
             <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
-                    <v-chip class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
+                    <v-chip v-if="$store.state.token != ''" class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
                 </template>
                 <v-card elevation="3" outlined shaped class="my-4">
                     <v-card-title>Hello!</v-card-title>
@@ -49,7 +49,7 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-            <v-chip class="ma-1">Delete Post</v-chip>
+            <v-chip v-if="$store.state.token != ''" class="ma-1">Delete Post</v-chip>
             </v-col>
         </v-card>
    </v-row>   
