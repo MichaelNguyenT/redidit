@@ -15,26 +15,24 @@
       >Thank you for registering, please sign in.</div>
       <v-row>
       <v-col cols="12" sm="6" md="3">
-      <v-text-field label="Username" outlined class="sr-only" v-model="user.username">
-      <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        required
-        autofocus
-      />
+      <v-text-field label="Username" outlined class="sr-only form-control" 
+      v-model="user.username" 
+      type="text" 
+      id="username" 
+      placeholder="Username" 
+      required 
+      autofocus
+      >
       </v-text-field>
       </v-col>
        <v-col cols="12" sm="6" md="3">
-      <v-text-field label="Password" outlined class="sr-only" v-model="user.password">
-      <input
-        type="password"
-        id="password"
-        class="form-control"
-        placeholder="Password"
-        required
-      />
+      <v-text-field label="Password" outlined class="sr-only form-control" 
+      v-model="user.password" 
+      type="password" 
+      id="password" 
+      placeholder="Password" 
+      required
+      >
       </v-text-field>
        </v-col>
       </v-row>
