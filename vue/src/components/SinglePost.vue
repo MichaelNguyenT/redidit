@@ -3,7 +3,7 @@
         <v-container grid-list-xl>
             <v-row>
              <v-card elevation="3" outlined shaped class="my-6" fluid style="width: 100%">
-                <v-card-title class="pa-md-2">{{post.postTitle}}</v-card-title>
+                <v-card-title class="pa-ma-2">{{post.postTitle}}</v-card-title>
                     <v-col class="d-flex justify-start mb-1 py-0">
                         <v-avatar>
                             <img src="https://images-ext-2.discordapp.net/external/AdJWzJfIdpBJppSLXDGvxWy5Pgs9r4K5IczkHsiLU1g/https/i.ytimg.com/vi/GNc_ZKCmjJ8/maxresdefault.jpg?width=786&height=442">
@@ -22,20 +22,20 @@
                     <v-card-text>{{ post.content }}</v-card-text>
                 </v-col>
                 <v-divider class="mt-0 mx-4"></v-divider>
-                <v-col class="d-flex mb-1">
-                    <v-chip class="ma-1 d-flex justify-start" @click.native="addCounter(1)">
+                <v-col class="d-flex justify-end mb-1">
+                    <v-chip class="ma-1" @click.native="addCounter(1)">
                          <v-icon medium>
                               mdi-duck 
                         </v-icon>
                             Yes +{{ counterUp }}
                         </v-chip>
-                    <v-chip class="ma-1 d-flex justify-start " @click.native="subtractCounter(-1)">
+                    <v-chip class="ma-1" @click.native="subtractCounter(-1)">
                          <v-icon medium>
                             mdi-beehive-off-outline 
                         </v-icon>
                             Eww {{ counterDown }}
                     </v-chip>
-                     <v-chip class="ma-1 d-flex justify-end" @click.native="displayReplies(post.postId)">See Replies</v-chip>
+                     <v-chip class="ma-1" @click.native="displayReplies(post.postId)">See Replies</v-chip>
                     <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
             <v-dialog>
                 <template v-slot:activator="{ on, attrs }">
@@ -99,10 +99,10 @@ export default {
         hideReplies() {
             this.replies = [];
         },
-        addCounter(operand){
+        addCounter(operand) {
             this.counterUp += operand;
         },
-        subtractCounter(operand){
+        subtractCounter(operand) {
             this.counterDown += operand;
         }
     },

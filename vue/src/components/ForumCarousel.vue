@@ -1,13 +1,15 @@
 <template>
-<v-card class="mx-auto">
+<v-card class="d-flex mx-15 mb-15">
             <v-carousel>
                 <v-carousel-item v-for="forum in forums" v-bind:key="forum.forumId">
-                 <v-row class="fill-height" align="center" justify="center">
-                    <v-img src="https://cdn.mos.cms.futurecdn.net/jG3Csc3oK8zvPgzPn5CPMJ-1024-80.jpg.webp" max-height="500" max-width="500"></v-img>
-                     <h1 class="ma-8">
+                 <v-row class="fill-height">
+                    <v-col align="center" justify="center">
+                    <v-img src="https://cdn.mos.cms.futurecdn.net/jG3Csc3oK8zvPgzPn5CPMJ-1024-80.jpg.webp" max-height="500" max-width="500" class="ma-4"></v-img>
+                     <h1 class="ma-2">
                         <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text">{{ forum.forumTitle }}</router-link>
                     </h1>
-                    <v-chip class="ma-5 pa-8 d-flex align-end">Love</v-chip>
+                     <v-chip class="align-end ma-4 pa-6">Love</v-chip>
+                    </v-col>
                 </v-row>
                 
             </v-carousel-item>    

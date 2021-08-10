@@ -15,6 +15,7 @@
 ></v-img>
       </v-toolbar-title><v-spacer></v-spacer>
       <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp; | &nbsp;
+      <router-link v-bind:to="{ name: 'login' }">Login</router-link>&nbsp; | &nbsp;
       <router-link v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
       <router-link v-bind:to="{ name: 'myaccount' }">MyAccount</router-link>
       </v-app-bar>
