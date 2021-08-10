@@ -5,6 +5,8 @@
             
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
             <v-btn class="pa-10 ma-10">Most Popular</v-btn>
+            <v-btn class="pa-10 ma-10">Add Post</v-btn>
+            <v-btn class="pa-10 ma-10">Delete Forum</v-btn>
         </v-row>
         <post-detail v-bind:posts="posts"/>
         <replies />

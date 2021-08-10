@@ -7,6 +7,7 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import PostDetail from '../views/PostDetails.vue'
 import Replies from '../views/PostDetails.vue'
+import MyAccount from '../views/MyAccount.vue'
 
 Vue.use(Router)
 
@@ -70,6 +71,11 @@ const router = new Router({
       meta: {
         requiresAuth: false
       }
+    },
+    {
+      path: "/myaccount",
+      name: "myaccount",
+      component: MyAccount
     }
     ]
 })
