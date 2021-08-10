@@ -23,17 +23,17 @@
                 </v-col>
                 <v-divider class="mt-0 mx-4"></v-divider>
                 <v-col class="d-flex justify-end mb-1">
-                    <v-chip class="ma-1" @click.native="addCounter(1)">
+                    <v-chip class="ma-1" @click.native="addCounter(post.postId)">
                          <v-icon medium>
                               mdi-duck 
                         </v-icon>
-                            Yes +{{ counterUp }}
+                            Yes {{ post.upvoteCounter }}
                         </v-chip>
-                    <v-chip class="ma-1" @click.native="subtractCounter(-1)">
+                    <v-chip class="ma-1" @click.native="subtractCounter(post.postId)">
                          <v-icon medium>
                             mdi-beehive-off-outline 
                         </v-icon>
-                            Eww {{ counterDown }}
+                            Eww {{ post.downvoteCounter }}
                     </v-chip>
                      <v-chip class="ma-1" @click.native="displayReplies(post.postId)">See Replies</v-chip>
                     <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
@@ -99,11 +99,21 @@ export default {
         hideReplies() {
             this.replies = [];
         },
-        addCounter(operand) {
-            this.counterUp += operand;
+        addCounter(postId) {
+            postService.updateUpvote(postId)
+            // .then((response) => {
+            //     if (response.status == 200) {
+                    
+            //     }
+            // })
         },
-        subtractCounter(operand) {
-            this.counterDown += operand;
+        subtractCounter(postId) {
+            postService.updateDownvote(postId)
+            // .then((response) => {
+            //     if (response.status == 200) {
+                    
+            //     }
+            // })
         }
     },
     filters: {

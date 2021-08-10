@@ -1,32 +1,28 @@
 import axios from 'axios';
-const http = axios.create({
-  baseURL: "https://localhost:44315"
-});
-
 
 export default {
 
     getPost(forumId) {
-        return http.get(`/forum/${forumId}`)
+        return axios.get(`/forum/${forumId}`)
       },
 
     getReplies(postId) {
-      return http.get(`/post/${postId}`)
+      return axios.get(`/post/${postId}`)
     },
 
     addReply(reply) {
-      return http.post('/post', reply)
+      return axios.post('/post', reply)
     },
 
     updateUpvote(postId) {
-      return http.put(`/upvotes${postId}`) //takes postId, all other logic handled in back end
+      return axios.put(`/upvotes${postId}`) //takes postId, all other logic handled in back end
     },
 
     updateDownvote(postId) {
-      return http.put(`/downvotes${postId}`)
+      return axios.put(`/downvotes${postId}`)
     },
 
     getForum() {
-      return http.get('/')
+      return axios.get('/')
     }
 }

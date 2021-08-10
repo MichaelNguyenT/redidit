@@ -142,16 +142,19 @@ namespace Capstone.DAO
             {
                 newUp = post.UpvoteCounter + 1;
                 newDown = post.DownvoteCounter - 1;
+                UpdateUserVoteStatus(userId, postId, 1);
             }
             else if(voteStatus == 1)
             {
                 newUp = post.UpvoteCounter - 1;
                 newDown = post.DownvoteCounter;
+                UpdateUserVoteStatus(userId, postId, 2);
             }
             else if (voteStatus == 2)
             {
                 newUp = post.UpvoteCounter + 1;
                 newDown = post.DownvoteCounter;
+                UpdateUserVoteStatus(userId, postId, 1);
             }
             try
             {
@@ -186,16 +189,19 @@ namespace Capstone.DAO
             {
                 newUp = post.UpvoteCounter;
                 newDown = post.DownvoteCounter - 1;
+                UpdateUserVoteStatus(userId, postId, 2);
             }
             else if (voteStatus == 1)
             {
                 newUp = post.UpvoteCounter - 1;
                 newDown = post.DownvoteCounter + 1;
+                UpdateUserVoteStatus(userId, postId, 0);
             }
             else if (voteStatus == 2)
             {
                 newUp = post.UpvoteCounter;
                 newDown = post.DownvoteCounter + 1;
+                UpdateUserVoteStatus(userId, postId, 0);
             }
             try
             {
