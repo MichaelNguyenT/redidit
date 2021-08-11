@@ -32,5 +32,17 @@ export default {
 
     getForum() {
       return axios.get('/')
+    },
+
+    deletePost(postId) {
+      return axios.delete(`/forum/${postId}`)
+    },
+
+    deleteForum(forumId) {
+      return axios.delete(`/forum${forumId}/delete`)
+    },
+
+    deleteReply(replyId) {
+      return axios.delete(`/post/${replyId}`)
     }
 }

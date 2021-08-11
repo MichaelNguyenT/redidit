@@ -49,7 +49,7 @@
                     </v-card-actions>
                 </v-card>
             </v-dialog>
-            <v-chip v-if="$store.state.token != ''" class="ma-1">Delete Post</v-chip>
+            <v-chip v-if="$store.state.user.role == 'admin'" class="ma-1" @click.native="deletePost()">Delete Post</v-chip>
             </v-col>
         </v-card>
    </v-row>   
@@ -112,6 +112,9 @@ export default {
                     let updateObject = {'postId': postId, 'response': response.data}
                     this.$store.commit("SET_VOTE_COUNTERS", updateObject)
                 })
+        },
+        deletePost() {
+
         }
     },
     filters: {

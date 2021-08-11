@@ -12,7 +12,7 @@
                 <v-card-text class="py-0">{{ reply.postedDate | moment }}</v-card-text>
                 <v-divider class="mt-0 mx-4"></v-divider>
                 <v-card-text>{{ reply.content }}</v-card-text>
-                <v-chip v-if="$store.state.token != ''" class="pa-1 ma-1">Delete Reply</v-chip>
+                <v-chip v-if="$store.state.user.role == 'admin'"  class="pa-1 ma-1" @click.native="deleteReply()">Delete Reply</v-chip>
             </v-card>
         </v-timeline-item>
         </v-timeline>
@@ -29,6 +29,11 @@ export default {
             replies: []
          }
      },
+    methods: {
+        deleteReply(){
+
+        }
+    },
     filters: {
         moment: function(postedDate) {
             return moment(postedDate).format('MMMM Do YYYY, h:mm:ss a');
