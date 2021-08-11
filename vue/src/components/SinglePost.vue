@@ -37,18 +37,20 @@
                     </v-chip>
                      <v-chip class="ma-1" @click.native="displayReplies(post.postId)">See Replies</v-chip>
                     <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
-            <v-dialog>
-                <template v-slot:activator="{ on, attrs }">
-                    <v-chip v-if="$store.state.token != ''" class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
+                    <template>
+                    <v-dialog>
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-chip v-if="$store.state.token != ''" class="ma-1" v-bind="attrs" v-on="on">Add Your Thoughts</v-chip>
+                        </template>
+                            <v-card elevation="3" outlined shaped class="my-4">
+                                <v-card-title>Hello!</v-card-title>
+                                <v-textarea outlined label="What you think bud?" v-model="reply.content" required></v-textarea>
+                                <v-card-actions>
+                                <v-btn @click.native="addReply">Save</v-btn>
+                                </v-card-actions>
+                            </v-card>
+                    </v-dialog>
                 </template>
-                <v-card elevation="3" outlined shaped class="my-4">
-                    <v-card-title>Hello!</v-card-title>
-                    <v-textarea outlined label="What you think bud?">{{ reply.content }}</v-textarea>
-                    <v-card-actions>
-                    <v-btn @click.native="addReply">Save</v-btn>
-                    </v-card-actions>
-                </v-card>
-            </v-dialog>
             <v-chip v-if="$store.state.user.role == 'admin'" class="ma-1" @click.native="deletePost()">Delete Post</v-chip>
             </v-col>
         </v-card>
@@ -63,6 +65,7 @@
 import moment from 'moment'
 import postService from '../services/PostService.js'
 import Replies from '../components/Replies.vue'
+//import addReply from '@/components/AddReply.vue'
 
 export default {
     components: { Replies },
@@ -75,9 +78,9 @@ export default {
             counterDown: 0,
             replies: [],
             reply: {
-                postId: this.postId,
+                postId: this.post.postId,
                 content: '',
-                username: this.username
+                username: this.$store.state.user.username
             }
         }
     },
@@ -86,7 +89,9 @@ export default {
              postService.addReply(this.reply).then(
                 (resp) =>{
                     if(resp.status === 201){
-                         this.reply = { postId: '', username: '', content: ''}
+                        this.$store.commit('ADD_REPLY', this.reply);
+                        this.$router.push(`/addReply/${this.$route.params.forumId}`);
+                         this.reply = { postId: '', username: '', content: ''};
                     }
                  })
         },

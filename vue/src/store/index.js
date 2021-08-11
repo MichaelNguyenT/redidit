@@ -23,7 +23,8 @@ export default new Vuex.Store({
     currentForum: '',
     upvoteCounter: 0,
     downvoteCounter: 0,
-    currentPosts: []
+    currentPosts: [],
+    currentReplies: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -50,6 +51,9 @@ export default new Vuex.Store({
     },
     ADD_POST(state, newPost) {
       state.currentPosts.push(newPost);
+    },
+    ADD_REPLY(state, newReply) {
+      state.currentReplies.push(newReply);
     }
   }
 })
