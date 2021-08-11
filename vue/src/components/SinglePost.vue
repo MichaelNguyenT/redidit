@@ -46,7 +46,7 @@
                                 <v-card-title>Hello!</v-card-title>
                                 <v-textarea outlined label="What you think bud?" v-model="reply.content" required></v-textarea>
                                 <v-card-actions>
-                                <v-btn @click.native="addReply">Save</v-btn>
+                                <v-btn @click.native="addReply()">Save</v-btn>
                                 </v-card-actions>
                             </v-card>
                     </v-dialog>

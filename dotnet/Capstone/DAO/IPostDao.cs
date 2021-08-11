@@ -10,6 +10,7 @@ namespace Capstone.DAO
     {
         Post GetPost(int postId);
         List<Post> GetPosts(int forumId);
+        List<Post> GetTodaysPopularPosts();
         Post CreatePost(int forumId, string postTitle, string username, string content, string imageURL = "");
         void DeletePost(int postId);
         void UpdateUpvoteCounter(int postId, int userId);
