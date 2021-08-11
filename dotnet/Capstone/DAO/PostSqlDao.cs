@@ -71,9 +71,39 @@ namespace Capstone.DAO
             }
             catch (SqlException e)
             {
-                throw;
+                throw e;
             }
             return posts;
+        }
+
+        public List<Post> GetTodaysPopularPosts()
+        {
+            List<Post> popular = new List<Post>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand("SELECT TOP (10) *,(upvote_counter - downvote_counter) AS combined_votes " +
+                        "FROM posts " +
+                        "WHERE posted_date >= DATEADD(hh, -24, GETDATE()) AND (upvote_counter - downvote_counter) > 0 " +
+                        "ORDER BY combined_votes DESC;", conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        popular.Add(GetPostFromReader(reader));
+                    }
+                }
+            }
+            catch (SqlException e)
+            {
+                throw e;
+            }
+
+            return popular;
         }
 
         public Post CreatePost(int forumId, string postTitle, string username, string content, string imageURL)
