@@ -55,7 +55,7 @@ CREATE TABLE posts (
 	upvote_counter int NOT NULL,
 	downvote_counter int NOT NULL,
 	posted_date datetime NOT NULL,
-	image_url varchar(200),
+	image_url varchar(MAX),
 	CONSTRAINT PK_post PRIMARY KEY (post_id),
 	CONSTRAINT FK_forum FOREIGN KEY (forum_id) REFERENCES forums_list (forum_id)
 )
