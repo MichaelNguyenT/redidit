@@ -89,18 +89,45 @@ namespace Capstone.Controllers
         {
               int currentUserId = GetUserId();
               if (postDao.GetPost(postId) != null)
-            {
+              {
                 int userHasVote = postDao.CheckForUserVote(currentUserId, postId);
-                if(userHasVote == 0)
+                int voteStatus = postDao.CheckUserVoteStatus(currentUserId, postId); //voteStatus: 0 = downvote, 1 = upvote, 2 = default state
+                if (userHasVote == 0)
                 {
                     postDao.AddVoteToVoteTable(postId, currentUserId, 2);
-                    postDao.UpdateUpvoteCounter(postId, currentUserId);
-                    return Ok();
+                    if (voteStatus == 0)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("plusminus"); //first is upvote second is downvote
+                    }
+                    else if (voteStatus == 1)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("minusno");
+                    }
+                    else if (voteStatus == 2)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("plusno");
+                    }
                 }
                 else
                 {
-                    postDao.UpdateUpvoteCounter(postId, currentUserId);
-                    return Ok();
+                    if (voteStatus == 0)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("plusminus"); //first is upvote second is downvote
+                    }
+                    else if (voteStatus == 1)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("minusno");
+                    }
+                    else if (voteStatus == 2)
+                    {
+                        postDao.UpdateUpvoteCounter(postId, currentUserId);
+                        return Ok("plusno");
+                    }
                 }
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated."  });
@@ -113,16 +140,43 @@ namespace Capstone.Controllers
             if (postDao.GetPost(postId) != null)
             {
                 int userHasVote = postDao.CheckForUserVote(currentUserId, postId);
+                int voteStatus = postDao.CheckUserVoteStatus(currentUserId, postId); //voteStatus: 0 = downvote, 1 = upvote, 2 = default state
                 if (userHasVote == 0)
                 {
                     postDao.AddVoteToVoteTable(postId, currentUserId, 2);
-                    postDao.UpdateDownvoteCounter(postId, currentUserId);
-                    return Ok();
+                    if (voteStatus == 0)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("nominus"); //first is upvote second is downvote
+                    }
+                    else if (voteStatus == 1)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("minusplus");
+                    }
+                    else if (voteStatus == 2)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("noplus");
+                    }
                 }
                 else
                 {
-                    postDao.UpdateDownvoteCounter(postId, currentUserId);
-                    return Ok();
+                    if (voteStatus == 0)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("nominus"); //first is upvote second is downvote
+                    }
+                    else if (voteStatus == 1)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("minusplus");
+                    }
+                    else if (voteStatus == 2)
+                    {
+                        postDao.UpdateDownvoteCounter(postId, currentUserId);
+                        return Ok("noplus");
+                    }
                 }
             }
             return BadRequest(new { message = "An error occurred: Counters could not be updated." });

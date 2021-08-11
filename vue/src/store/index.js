@@ -50,6 +50,29 @@ export default new Vuex.Store({
     },
     ADD_POST(state, newPost) {
       state.currentPosts.push(newPost);
+    },
+    SET_VOTE_COUNTERS(state, updateObject){
+      let postToChange = state.currentPosts.find(element => element.postId == updateObject.postId)
+      if (updateObject.response == 'plusminus') { //first is upvote second is downvote, no means no change
+        postToChange.upvoteCounter = postToChange.upvoteCounter + 1
+        postToChange.downvoteCounter = postToChange.downvoteCounter - 1
+      }
+      else if (updateObject.response == 'minusno') {
+        postToChange.upvoteCounter = postToChange.upvoteCounter - 1
+      }
+      else if (updateObject.response == 'plusno') {
+        postToChange.upvoteCounter = postToChange.upvoteCounter + 1
+      }
+      else if (updateObject.response == 'nominus') {
+        postToChange.downvoteCounter = postToChange.downvoteCounter - 1
+      }
+      else if (updateObject.response == 'minusplus') {
+        postToChange.upvoteCounter = postToChange.upvoteCounter - 1
+        postToChange.downvoteCounter = postToChange.downvoteCounter + 1
+      }
+      else if (updateObject.response == 'noplus') {
+        postToChange.downvoteCounter = postToChange.downvoteCounter + 1
+      }
     }
   }
 })

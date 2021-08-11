@@ -27,13 +27,13 @@
                          <v-icon medium>
                               mdi-duck 
                         </v-icon>
-                            Yes {{ this.$store.state.upvoteCounter }}
+                            Yes {{ post.upvoteCounter }}
                         </v-chip>
                     <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="subtractCounter(post.postId)">
                          <v-icon medium>
                             mdi-beehive-off-outline 
                         </v-icon>
-                            Eww {{ this.$store.state.downvoteCounter }}
+                            Eww {{ post.downvoteCounter }}
                     </v-chip>
                      <v-chip class="ma-1" @click.native="displayReplies(post.postId)">See Replies</v-chip>
                     <v-chip class="ma-1" @click.native="hideReplies">Hide Replies</v-chip>
@@ -101,9 +101,17 @@ export default {
         },
         addCounter(postId) {
             postService.updateUpvote(postId)
+                .then((response) => {
+                    let updateObject = {'postId': postId, 'response': response.data}
+                    this.$store.commit("SET_VOTE_COUNTERS", updateObject)
+                })
         },
         subtractCounter(postId) {
             postService.updateDownvote(postId)
+                .then((response) => {
+                    let updateObject = {'postId': postId, 'response': response.data}
+                    this.$store.commit("SET_VOTE_COUNTERS", updateObject)
+                })
         }
     },
     filters: {
