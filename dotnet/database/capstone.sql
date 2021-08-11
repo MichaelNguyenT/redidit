@@ -116,11 +116,5 @@ INSERT INTO user_favorite_forum (user_id, forum_id) VALUES (2, 3);
 
 INSERT INTO user_moderator_forum (user_id, forum_id) VALUES (1, 3);
 
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (1, 1, 1);
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (1, 2, 0);
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (1, 3, 1);
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (2, 1, 1);
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (2, 2, 0);
-INSERT INTO user_vote_posts (user_id, post_id, vote) VALUES (2, 3, 0);
 GO
 
