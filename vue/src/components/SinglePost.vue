@@ -46,7 +46,7 @@
                                 <v-card-title>Hello!</v-card-title>
                                 <v-textarea outlined label="What you think bud?" v-model="reply.content" required></v-textarea>
                                 <v-card-actions>
-                                <v-btn @click.native="addReply">Save</v-btn>
+                                <v-btn @click.native="addReply()">Save</v-btn>
                                 </v-card-actions>
                             </v-card>
                     </v-dialog>
@@ -88,11 +88,11 @@ export default {
         addReply() {
              postService.addReply(this.reply).then(
                 (resp) =>{
-                    if(resp.status === 201){
+                        console.log(this.reply);
                         this.$store.commit('ADD_REPLY', this.reply);
                         this.$router.push(`/addReply/${this.$route.params.forumId}`);
-                         this.reply = { postId: '', username: '', content: ''};
-                    }
+                        this.reply = { postId: '', username: '', content: ''};
+                    
                  })
         },
          displayReplies(postId) {

@@ -42,6 +42,20 @@ namespace Capstone.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("/popular")]
+        public ActionResult<List<Post>> GetPopularToday()
+        {
+            List<Post> popular = new List<Post>();
+            popular = postDao.GetTodaysPopularPosts();
+
+            if (popular != null)
+            {
+                return Ok(popular);
+            }
+            return NotFound();
+        }
+
+        [AllowAnonymous]
         [HttpGet("/posts/{postId}")]
         public ActionResult<Post> GetPost(int postId)
         {
