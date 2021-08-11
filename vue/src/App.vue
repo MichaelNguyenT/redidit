@@ -2,26 +2,47 @@
   <v-app id="app">
     <div id="nav">
       <v-switch
-          v-model="$vuetify.theme.dark"
-          label="Light/Dark Mode"
-        ></v-switch>
+        v-model="$vuetify.theme.dark"
+        label="Light/Dark Mode"
+      ></v-switch>
       <v-card elevation="3">
-      <v-app-bar flat>
-      <v-toolbar-title><v-img
-  lazy-src="https://picsum.photos/id/11/10/6"
-  max-height="54"
-  max-width="250"
-  src="https://i.ibb.co/MnvSs9j/Redidit-mockup-logo-6-removebg-preview.png" alt="Redidit-mockup-logo-6-removebg-preview" border="0"
-></v-img>
-      </v-toolbar-title><v-spacer></v-spacer>
-      <router-link class="pa-2" v-bind:to="{ name: 'home' }">Home</router-link>
-      <router-link class="pa-2" v-bind:to="{ name: 'login' }" v-if="$store.state.token == ''">Login</router-link>
-      <router-link class="pa-2" v-bind:to="{ name: 'myaccount'}" v-if="$store.state.token != ''">MyAccount</router-link>
-      <router-link class="pa-2" v-bind:to="{ name: 'logout' }" v-if="$store.state.token != ''">Logout</router-link>
-      </v-app-bar>
+        <v-app-bar flat>
+          <v-toolbar-title
+            ><v-img
+              lazy-src="https://i.ibb.co/FWJ4rBV/Redidit-final-logo.png"
+              max-height="54"
+              max-width="250"
+              src="https://i.ibb.co/7zVtfG4/Redidit-final-logo.png"
+              alt="Redidit-final-logo"
+              border="0"
+              contain
+              align-self-strech
+            ></v-img> </v-toolbar-title
+          ><v-spacer></v-spacer>
+          <router-link class="pa-2" v-bind:to="{ name: 'home' }"
+            >Home</router-link
+          >
+          <router-link
+            class="pa-2"
+            v-bind:to="{ name: 'login' }"
+            v-if="$store.state.token == ''"
+            >Login</router-link
+          >
+          <router-link
+            class="pa-2"
+            v-bind:to="{ name: 'myaccount' }"
+            v-if="$store.state.token != ''"
+            >MyAccount</router-link
+          >
+          <router-link
+            class="pa-2"
+            v-bind:to="{ name: 'logout' }"
+            v-if="$store.state.token != ''"
+            >Logout</router-link
+          >
+        </v-app-bar>
       </v-card>
     </div>
     <router-view />
-    
   </v-app>
 </template>
