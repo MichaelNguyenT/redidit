@@ -53,8 +53,9 @@ export default new Vuex.Store({
       state.currentPosts.push(newPost);
     },
     ADD_REPLY(state, newReply) {
-      state.currentReplies.push(newReply);
-    SET_VOTE_COUNTERS(state, updateObject){
+      state.currentReplies.push(newReply)
+    },
+    SET_VOTE_COUNTERS(state, updateObject) {
       let postToChange = state.currentPosts.find(element => element.postId == updateObject.postId)
       if (updateObject.response == 'plusminus') { //first is upvote second is downvote, no means no change
         postToChange.upvoteCounter = postToChange.upvoteCounter + 1
