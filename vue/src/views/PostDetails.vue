@@ -1,13 +1,13 @@
 <template>
     <div class="secondary">
-        <h1 align="center">{{ $store.state.currentForum }}</h1>
+        <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum }}</h1>
         <v-row align="center" justify="center" no gutters>
             
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
             <v-btn class="pa-10 ma-10">Most Popular</v-btn>
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Love Forum</v-btn>
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Add Post</v-btn>
-            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Delete Forum</v-btn>
+            <v-btn v-if="$store.state.user.role == 'admin'" class="pa-10 ma-10" @click.native="deleteForum()">Delete Forum</v-btn>
         </v-row>
         <post-detail v-bind:posts="posts"/>
         <replies />
@@ -39,7 +39,11 @@ export default {
                 this.posts = resp.data;
             })
     },
+    methods: {
+        deleteForum() {
 
+        }
+    }
 }
 </script>
 
