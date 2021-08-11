@@ -13,7 +13,7 @@
             </v-form>
         </v-card-text>
     </v-card>
-    </v-dialogue>
+  </v-dialogue>
 </template>
 
 <script>
@@ -24,9 +24,9 @@ export default {
     data() {
     return {
       post: {
-        forumId: this.$route.params.forumId, //how to get current forumId?
+        forumId: this.$route.params.forumId,
         postTitle: "",
-        username: this.$store.state.user.username, //may have to call back end controller to get username first
+        username: this.$store.state.user.username,
         content: "",
         imageURL: ""
       }
@@ -39,11 +39,12 @@ export default {
         .addPost(this.post)
         .then(response => {
           if (response.status == 201) {
+            this.$store.commit('ADD_POST', this.post);
             this.$router.push(`/forum/${this.$route.params.forumId}`);
           }
         })
         .catch(error => {
-            alert('Error: The post could not be added to the forum.'); //change to an alert?
+            alert('Error: The post could not be added to the forum.');
             }
         );
     }
