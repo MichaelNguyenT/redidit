@@ -88,11 +88,13 @@ export default {
         addReply() {
              postService.addReply(this.reply).then(
                 (resp) =>{
-                        console.log(this.reply);
-                        this.$store.commit('ADD_REPLY', this.reply);
-                        this.$router.push(`/addReply/${this.$route.params.forumId}`);
-                        this.reply = { postId: '', username: '', content: ''};
-                    
+                    if(resp.status === 200){
+                        this.reply = {
+                    postId: this.post.postId,
+                    content: '',
+                    username: this.$store.state.user.username
+                }
+                    }
                  })
         },
          displayReplies(postId) {

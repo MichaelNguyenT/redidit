@@ -44,5 +44,9 @@ export default {
 
     deleteReply(replyId) {
       return axios.delete(`/post/${replyId}`)
+    },
+
+    createForum(forum) {
+      return axios.post(`/`, forum)
     }
 }
