@@ -20,11 +20,12 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    currentForum: '',
+    currentForum: {},
     upvoteCounter: 0,
     downvoteCounter: 0,
     currentPosts: [],
-    currentReplies: []
+    currentReplies: [],
+    favoriteForums: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -43,8 +44,14 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    SET_CURRENT_FORUM(state, forumName) {
-      state.currentForum = forumName;
+    SET_CURRENT_FORUM(state, forum) {
+      state.currentForum = forum;
+    },
+    SET_FAVORITE_FORUMS(state, forums) {
+      state.favoriteForums = forums;
+    },
+    CLEAR_FAVORITE_FORUMS(state) {
+      state.favoriteForums = [];
     },
     SET_CURRENT_POSTS(state, posts) {
       state.currentPosts = posts;
@@ -53,9 +60,14 @@ export default new Vuex.Store({
       state.currentPosts.push(newPost);
     },
     LOVE_FORUM(state, lovedForum){
-      state.lovedForum = lovedForum;
+      if (state.favoriteForums.includes(lovedForum)) {
+        alert('Forum already loved.');
+      }
+      else {
+        state.favoriteForums.push(lovedForum);
+        alert('Forum succesfully loved.');
+      }
     },
-
     SET_VOTE_COUNTERS(state, updateObject){
       let postToChange = state.currentPosts.find(element => element.postId == updateObject.postId)
       if (updateObject.response == 'plusminus') { //first is upvote second is downvote, no means no change

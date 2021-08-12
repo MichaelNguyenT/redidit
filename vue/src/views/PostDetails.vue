@@ -1,11 +1,11 @@
 <template>
     <div class="secondary">
-        <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum }}</h1>
+        <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum.forumTitle }}</h1>
         <v-row align="center" justify="center" no gutters>
             
             <v-btn class="pa-10 ma-10">Most Recent</v-btn>
             <v-btn class="pa-10 ma-10">Most Popular</v-btn>
-            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Love Forum</v-btn>
+            <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10" @click.native="loveForum()">Love Forum</v-btn>
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10" @click.native="showPostForm = !showPostForm">Add Post</v-btn>
                 <div v-show="showPostForm">
                     <add-post />
@@ -49,6 +49,14 @@ export default {
     methods: {
         deleteForum() {
 
+        },
+
+        loveForum() {
+            this.$store.commit('LOVE_FORUM', this.$store.state.currentForum);
+        },
+
+        setCurrentForum(forum) {
+            this.$store.commit('SET_CURRENT_FORUM', forum);
         }
     }
 }
