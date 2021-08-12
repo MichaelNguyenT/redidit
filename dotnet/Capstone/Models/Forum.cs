@@ -9,5 +9,6 @@ namespace Capstone.Models
     {
         public int ForumId { get; set; }
         public string ForumTitle { get; set; }
+        public string ForumPicture { get; set; }
     }
 }

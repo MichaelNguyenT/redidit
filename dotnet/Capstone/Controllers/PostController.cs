@@ -31,8 +31,7 @@ namespace Capstone.Controllers
         [HttpGet("/forum/{forumId}")]
         public ActionResult<List<Post>> GetPosts(int forumId)
         {
-            List<Post> posts = new List<Post>();
-            posts = postDao.GetPosts(forumId);
+            List<Post> posts = postDao.GetPosts(forumId);
 
             if (posts != null)
             {
@@ -45,8 +44,7 @@ namespace Capstone.Controllers
         [HttpGet("/popular")]
         public ActionResult<List<Post>> GetPopularToday()
         {
-            List<Post> popular = new List<Post>();
-            popular = postDao.GetTodaysPopularPosts();
+            List<Post> popular = postDao.GetTodaysPopularPosts();
 
             if (popular != null)
             {
@@ -59,8 +57,7 @@ namespace Capstone.Controllers
         [HttpGet("/posts/{postId}")]
         public ActionResult<Post> GetPost(int postId)
         {
-            Post post = new Post();
-            post = postDao.GetPost(postId);
+            Post post = postDao.GetPost(postId);
 
             if(post != null)
             {
@@ -147,7 +144,7 @@ namespace Capstone.Controllers
         }
 
         [HttpPut("/downvotes{postId}")]
-        public ActionResult UpdateDownvoteCounter(int postId, int downvoteCounter)
+        public ActionResult UpdateDownvoteCounter(int postId)
         {
             int currentUserId = GetUserId();
             if (postDao.GetPost(postId) != null)

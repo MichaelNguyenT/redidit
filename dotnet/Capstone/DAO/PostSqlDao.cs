@@ -108,7 +108,6 @@ namespace Capstone.DAO
 
         public Post CreatePost(int forumId, string postTitle, string username, string content, string imageURL)
         {
-            Post returnPost = null;
             int newPostId = 0;
 
             try

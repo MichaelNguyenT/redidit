@@ -2,7 +2,7 @@
     <div>
         <v-container grid-list-xl>
             <v-row>
-             <v-card elevation="3" outlined shaped class="my-6" fluid style="width: 100%">
+             <v-card elevation="3" outlined class="my-6" fluid style="width: 100%">
                 <v-card-title class="pa-ma-2">{{post.postTitle}}</v-card-title>
                     <v-col class="d-flex justify-start mb-1 py-0">
                         <v-avatar>
@@ -14,10 +14,10 @@
                 <v-divider class="mt-0 mx-4"></v-divider>
                 <v-col class="d-flex justify-space-between align-center">
                     <v-img
-                        lazy-src="https://picsum.photos/id/11/10/6"
+                        
                         max-height="200"
                         max-width="200"
-                        src="https://picsum.photos/id/11/500/300"
+                        :src = post.imageURL
                     ></v-img>
                     <v-card-text>{{ post.content }}</v-card-text>
                 </v-col>
@@ -25,13 +25,13 @@
                 <v-col class="d-flex justify-end mb-1">
                     <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="addCounter(post.postId)">
                          <v-icon medium>
-                              mdi-duck 
+                              mdi-heart-plus 
                         </v-icon>
                             Yes {{ post.upvoteCounter }}
                         </v-chip>
                     <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="subtractCounter(post.postId)">
                          <v-icon medium>
-                            mdi-beehive-off-outline 
+                            mdi-home-remove 
                         </v-icon>
                             Eww {{ post.downvoteCounter }}
                     </v-chip>

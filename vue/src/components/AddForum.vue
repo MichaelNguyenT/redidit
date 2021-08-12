@@ -7,6 +7,7 @@
         <v-card-text>
             <v-form class="px-3">
                 <v-text-field label="Forum Name" v-model="forum.forumTitle" prepend-icon="" required></v-text-field>
+                <v-text-field label="Photo Link (Supply your own photo or leave our link to use our default):" v-model="forum.forumPicture" prepend-icon="camera-plus"></v-text-field>
                 <v-btn flat class="success mx-0 mt-3" @click.native="createForum()">Create</v-btn>
             </v-form>
         </v-card-text>
@@ -23,7 +24,8 @@ export default {
     data() {
     return {
       forum: {
-        forumTitle: ""
+        forumTitle: "",
+        forumPicture: "http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w"
       }
     };
   },
@@ -35,7 +37,8 @@ export default {
             .then(response => {
                 if (response.status == 200) {
                     this.forum = {
-                        forumTitle: ""
+                        forumTitle: "",
+                        forumPicture: "http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w"
                     }
                     alert('Forum succesfully created!');
                     this.$router.push('/');

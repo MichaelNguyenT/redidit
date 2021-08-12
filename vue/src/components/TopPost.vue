@@ -1,5 +1,5 @@
 <template>
-<v-card class="d-flex mx-15 mb-15">
+<v-card class="d-flex mx-16 mb-15">
             <v-carousel>
                 <v-carousel-item v-for="post in posts" v-bind:key="post.postId">
                     <v-row class="fill-height">
