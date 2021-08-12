@@ -52,6 +52,9 @@ export default new Vuex.Store({
     ADD_POST(state, newPost) {
       state.currentPosts.push(newPost);
     },
+    LOVE_FORUM(state, lovedForum){
+      state.lovedForum = lovedForum;
+    },
 
     SET_VOTE_COUNTERS(state, updateObject){
       let postToChange = state.currentPosts.find(element => element.postId == updateObject.postId)

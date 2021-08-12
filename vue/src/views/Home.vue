@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
+  <div class="home primary">
     <h2 align="center" class="ma-5 pa-5 secondary">Top Forums Now</h2>
     <forum-carousel />
     <h3 align="center" class="ma-5 pa-5 secondary">Find Your New Favorite Forum</h3>
     <search-forums />
     <h2 align="center" class="ma-5 pa-5 secondary">Top Posts Now</h2>
-    <top-post />
-   
+    <top-post /> 
   </div>
 </template>
 

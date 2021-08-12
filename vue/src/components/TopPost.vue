@@ -1,8 +1,18 @@
 <template>
-<v-card class="mx-15 mb-15">
+<v-card class="d-flex mx-15 mb-15">
             <v-carousel>
-                <v-carousel-item>
-                    <single-post v-for="post in posts" v-bind:key="post.postId" v-bind:post="post"></single-post> 
+                <v-carousel-item v-for="post in posts" v-bind:key="post.postId">
+                    <v-row class="fill-height">
+                       <v-col align="center" justify="center" class="ma-15">
+                            <v-avatar>
+                                <img src="https://images-ext-2.discordapp.net/external/AdJWzJfIdpBJppSLXDGvxWy5Pgs9r4K5IczkHsiLU1g/https/i.ytimg.com/vi/GNc_ZKCmjJ8/maxresdefault.jpg?width=786&height=442">
+                            </v-avatar>
+                            <h1>{{ post.username }}</h1>
+                            <h1>{{ post.postTitle }}</h1>
+                            <h2>{{ post.postedDate | moment }}</h2>
+                            <h2>{{ post.content }}</h2>
+                       </v-col>
+                    </v-row>
                 </v-carousel-item>    
         </v-carousel>
 </v-card>
@@ -10,22 +20,20 @@
 
 
 <script>
-import moment from 'moment'
 import postService from '../services/PostService.js'
-import SinglePost from '../components/SinglePost.vue'
+import moment from 'moment'
 
 //greg imported all features below from PostDetails, but then moved into making SinglePost component. May need the below, may not; this component in only for top post on homepage as of now.
 
 export default {
     name: "top-post",
-    components: { SinglePost },
     data() {
         return {
             posts: [],
         }
     },
     created() {
-        postService.getPost(this.$route.params.forumId).then(
+        postService.getPopularPost().then(
             (resp) => {
                 this.posts = resp.data;
             })

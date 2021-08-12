@@ -9,7 +9,6 @@
                         <h1 class="ma-2">
                         <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
                         </h1>
-                     <v-chip v-if="$store.state.token != ''" @click.native="loveForum" class="align-end ma-4 pa-6">Love</v-chip>
                     </v-col>
                 </v-row>
             </v-carousel-item>    
@@ -18,41 +17,19 @@
 </template>
 
 <script>
-import postService from '../services/PostService.js'
+import postService from '../services/PostService.vue'
 
 export default {
-    name: 'forum-carousel',
-     data(){
-         return {
+    name: 'loved-forums',
+    data() {
+        return {
             forums: [],
-            forumId: this.forumId,
-            userId: this.$store.state.user.userId
-         }
-     },
-     created() {
-        postService.getForum().then(
+        }
+    },
+    created() {
+        postService.getFavoriteForums(this.$store.state.user.userId).then(
             (resp) => {
                 this.forums = resp.data;
             })
-    },
-    methods: {
-        setTitle(title) {
-            this.$store.commit('SET_CURRENT_FORUM', title);
-        },
-        loveForum() {
-            postService.loveForum(this.userId, this.forumId)
-            .then(resp => {
-                    if (resp.status == 200) {
-                    this.$store.commit('LOVE_FORUM', this.forumId);
-                    this.userId = this.$store.state.user.userId;
-                    this.forumId = this.$store.state.forumId;
-                }
-            }
-            )}
+    }
 }
-}
-</script>
-
-<style>
-
-</style>

@@ -43,7 +43,6 @@ export default {
         postService.getPost(this.$route.params.forumId).then(
             (resp) => {
                 this.posts = resp.data;
-
                 this.$store.commit('SET_CURRENT_POSTS', this.posts);
             })
     },

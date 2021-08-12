@@ -48,5 +48,17 @@ export default {
 
     createForum(forum) {
       return axios.post(`/`, forum)
+    },
+
+    getPopularPost() {
+      return axios.get('/popular');
+    },
+
+    loveForum(userId, forumId) {
+      return axios.post(`/favorites/user${userId}/forum${forumId}`);
+    },
+
+    getFavoriteForums(userId) {
+      return axios.get(`/favorites/${userId}`);
     }
 }
