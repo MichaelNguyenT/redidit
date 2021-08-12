@@ -11,7 +11,7 @@
             ><v-img
               lazy-src="https://i.ibb.co/FWJ4rBV/Redidit-final-logo.png"
               max-height="54"
-              max-width="250"
+              max-width="300"
               src="https://i.ibb.co/7zVtfG4/Redidit-final-logo.png"
               alt="Redidit-final-logo"
               border="0"
