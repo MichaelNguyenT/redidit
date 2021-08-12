@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-form>
+    <v-form  class="mx-10 mb-15">
       <v-container >
           <v-text-field label="Search Forums Here..." outlined class="grey pa-4 mb-8" v-model="search"></v-text-field>
       </v-container>

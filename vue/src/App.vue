@@ -19,6 +19,7 @@
               align-self-strech
             ></v-img> </v-toolbar-title
           ><v-spacer></v-spacer>
+          <h2 v-if="$store.state.token != ''">Hello, {{ this.$store.state.user.username }}!</h2>
           <router-link class="pa-2" v-bind:to="{ name: 'home' }"
             >Home</router-link
           >
@@ -34,6 +35,7 @@
             v-if="$store.state.token != ''"
             >MyAccount</router-link
           >
+          
           <router-link
             class="pa-2"
             v-bind:to="{ name: 'logout' }"
