@@ -50,11 +50,7 @@ UNIQUE (user_id, forum_id)
 CREATE TABLE posts (
 	post_id int IDENTITY(1,1) NOT NULL,
 	forum_id int NOT NULL,
-<<<<<<< HEAD
-	post_title varchar(100) NOT NULL,
-=======
 	post_title varchar(MAX) NOT NULL,
->>>>>>> f3486f456d2c1ea2be6772633a87fbf0d2861eed
 	username varchar(50) NOT NULL,
 	content varchar(3000) NOT NULL,
 	upvote_counter int NOT NULL,
