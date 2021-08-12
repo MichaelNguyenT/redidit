@@ -1,6 +1,6 @@
 <template>
 <div class="primary">
-  <h1 align="center" justify="center" class="py-5 my-5 primary">Welcome, {{ this.$store.state.user.username}}!</h1>
+  <h1 align="center" justify="center" class="py-5 my-5 secondary">Welcome, {{ this.$store.state.user.username}}!</h1>
   <v-btn class="pa-10 ma-10" @click.native="showForumForm = !showForumForm">Create your own Forum!</v-btn>
     <div v-show="showForumForm">
       <add-forum />
