@@ -89,13 +89,12 @@ namespace Capstone.Controllers
             {
                 return NotFound();
             }
-            else if(!forumDao.CheckUserModeratorForum(GetUserId(), postDao.GetPost(postId).ForumId)
-                || userDao.CheckAdmin(GetUserId()))
+            else if(userDao.CheckAdmin(GetUserId()) || forumDao.CheckUserModeratorForum(GetUserId(), postDao.GetPost(postId).ForumId))
             {
-                return Unauthorized();
+                postDao.DeletePost(postId);
+                return NoContent();
             }
-            postDao.DeletePost(postId);
-            return NoContent();
+            return Unauthorized();
         }
 
         [HttpPut("/upvotes{postId}")]

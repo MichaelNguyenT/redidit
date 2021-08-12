@@ -52,6 +52,21 @@ export default new Vuex.Store({
     ADD_POST(state, newPost) {
       state.currentPosts.push(newPost);
     },
+    DELETE_FORUM(state, deleteForum){
+      state.currentForum = state.currentForum.filter((forum) => {
+        return forum.currentForum !== deleteForum;
+      })
+  },
+    DELETE_POST(state, deletePost){
+        state.currentPosts = state.currentPosts.filter((forum) => {
+          return forum.currentForum !== deletePost;
+        })
+    },
+    DELETE_REPLY(state, deleteReply){
+      state.currentReplies = state.currentReplies.filter((reply) => {
+        return reply.replyId !== deleteReply;
+      })
+  },
     LOVE_FORUM(state, lovedForum){
       state.lovedForum = lovedForum;
     },

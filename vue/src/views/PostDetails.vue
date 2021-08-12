@@ -10,7 +10,7 @@
                 <div v-show="showPostForm">
                     <add-post />
                 </div>
-            <v-btn v-if="$store.state.user.role == 'admin'" class="pa-10 ma-10" @click.native="deleteForum()">Delete Forum</v-btn>
+            <v-btn v-if="$store.state.user.role == 'admin'" class="pa-10 ma-10" v-on:click="deleteForum(currentForum)">Delete Forum</v-btn>
         </v-row>
         <post-detail v-bind:posts="posts"/>
         <replies />
@@ -47,9 +47,16 @@ export default {
             })
     },
     methods: {
-        deleteForum() {
-
+        deleteForum(forumId) {
+            postService.deleteForum(forumId)
+            .then((response) => {
+                if (response.status === 204) {
+              alert("Forum has been deleted");
+              window.location.reload();
+            }
+            })
         }
+
     }
 }
 </script>
