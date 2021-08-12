@@ -27,8 +27,7 @@ namespace Capstone.Controllers
         [HttpGet("/")]
         public ActionResult<Forum> GetForums()
         {
-            List<Forum> forums = new List<Forum>();
-            forums = forumDao.GetForums();
+            List<Forum> forums = forumDao.GetForums();
 
             if (forums != null)
             {
@@ -40,7 +39,7 @@ namespace Capstone.Controllers
         [HttpPost("/")]
         public ActionResult<Forum> CreateForum(Forum forum)
         {
-            var returnForum = forumDao.CreateForum(forum.ForumTitle);        
+            var returnForum = forumDao.CreateForum(forum.ForumTitle, forum.ForumPicture);        
             forumDao.PromoteToModerator(GetUserId(), returnForum.ForumId);
 
             if (returnForum != null)
@@ -53,8 +52,7 @@ namespace Capstone.Controllers
         [HttpGet("/favorites/{userId}")]
         public IActionResult GetFavorites(int userId)
         {
-            List<Forum> forums = new List<Forum>();
-            forums = forumDao.GetFavoriteForums(userId);
+            List<Forum> forums = forumDao.GetFavoriteForums(userId);
 
             if (forums != null)
             {

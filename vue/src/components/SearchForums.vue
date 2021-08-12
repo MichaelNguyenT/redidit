@@ -1,15 +1,14 @@
 <template>
 <div>
-    <v-form>
-      <v-container>
-          <v-text-field label="Search Forums Here..." outlined class="grey pa-5 mb-8" v-model="search"></v-text-field>
-          
+    <v-form  class="mx-10 mb-15">
+      <v-container >
+          <v-text-field label="Search Forums Here..." outlined class="grey pa-4 mb-8" v-model="search"></v-text-field>
       </v-container>
     </v-form>
-    <v-card class="ma-1 pa-1" v-for="forum in filteredForums" v-bind:key="forum.forumId">
-        <h1>
+    <v-card v-show="search != ''" class="ma-1 pa-1" v-for="forum in filteredForums" v-bind:key="forum.forumId">
+        <h2>
         <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
-        </h1>
+        </h2>
     </v-card>
 </div>
 </template>
@@ -23,6 +22,7 @@ export default {
         return {
             forums: [],
             search: '',
+            empty: ''
         }
     },
      created() {

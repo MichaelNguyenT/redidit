@@ -11,7 +11,7 @@
             ><v-img
               lazy-src="https://i.ibb.co/FWJ4rBV/Redidit-final-logo.png"
               max-height="54"
-              max-width="250"
+              max-width="300"
               src="https://i.ibb.co/7zVtfG4/Redidit-final-logo.png"
               alt="Redidit-final-logo"
               border="0"
@@ -19,6 +19,7 @@
               align-self-strech
             ></v-img> </v-toolbar-title
           ><v-spacer></v-spacer>
+          <h2 v-if="$store.state.token != ''">Hello, {{ this.$store.state.user.username }}!</h2>
           <router-link class="pa-2" v-bind:to="{ name: 'home' }"
             >Home</router-link
           >
@@ -34,6 +35,7 @@
             v-if="$store.state.token != ''" 
             >MyAccount</router-link
           >
+          
           <router-link
             class="pa-2"
             v-bind:to="{ name: 'logout' }"
