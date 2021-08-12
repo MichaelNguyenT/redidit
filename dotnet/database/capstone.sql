@@ -88,10 +88,10 @@ INSERT INTO forums_list (forum_title, forum_picture) VALUES ('Movies that Need t
 INSERT INTO forums_list (forum_title, forum_picture) VALUES ('Animals that Could Use a Redo.', 'https://imgix.bustle.com/rehost/2016/9/13/f479670c-be2b-4cb1-b224-27605abd2a68.jpg?w=800&fit=crop&crop=faces&auto=format%2Ccompress');
 
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Initial Post: The wheel is old trash technology.', 'FutureMan37', 'It is 2021. Why are we using technology from the literal stoneage?? SMH. What are some ideas to make the wheel better/more modern??', 0, 0, GETDATE(), 'https://i.imgur.com/ZM5PoJa.jpeg');
-INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Be the Wheel', 'DunkaroosRule', 'why attach a whole vehicle when you can be the vehicle?', 0, 0, GETDATE(), 'https://i.imgur.com/lWkLqRP.gif');
+INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Be the Wheel', 'DunkaroosRule', 'why attach a whole vehicle to the wheels when you can be the vehicle?', 0, 0, GETDATE(), 'https://i.imgur.com/lWkLqRP.gif');
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Parm?', 'SwissCheeseStan', 'TALK ABOUT MEALS ON WHEELS JAJAJAJAJ', 0, 0, GETDATE(), 'https://static.turbosquid.com/Preview/001168/203/0Z/3D-parmesan-cheese-wheel_Z.jpg');
 
-INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (2, 'Saving Private Rhianna', 'FilmNerd4Ever', 'We need an all female cast. They brave the perils of Disturbia to find our queen safe underneath her Umbrella, ella, ella. Or something.', 0, 0, GETDATE(),'https://static.billboard.com/files/media/Rihanna-diamond-ball-2015-a-billboard-1548-compressed.jpg' );
+INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (2, 'Saving Private Rhianna', 'FilmNerd4Ever', 'We need an all female cast. They brave the perils of Disturbia to find our queen safe underneath her Umbrella, ella, ella.', 0, 0, GETDATE(),'https://static.billboard.com/files/media/Rihanna-diamond-ball-2015-a-billboard-1548-compressed.jpg' );
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (2, 'Vegan Dracula.', 'TreeHugger', 'The original nemesis of PETA, Transylvania''s own has a rude awakening when exposure to 5G waves gives them an allergy to blood! Will this bloodsucker turn into the world''s oldest soyboy?' , 0, 0, GETDATE(),'https://i.pinimg.com/originals/be/6a/95/be6a95a13e7d0229da6e777bdc82c1c3.jpg' );
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (2, 'Spiderman', 'SpideySensesTingling', 'I may get hate for this but I personally believe that Spiderman has not gotten enough attention and deserves a fresh reskin. I think the perfect casting for a fresh take would be the dog that starred in Airbud.', 0, 0, GETDATE(), 'https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2016/10/21102031/spider-costume-for-dog.jpg');
 
@@ -99,17 +99,38 @@ INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, down
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (3, 'Bats are wonderful!!!', 'AlysiaZebb', 'Usually small mammals have short lives and large mammals have long ones, but bats live about 11x longer than we would expect based on their size, and can live past 40! There''s only a single known virus that can kill bats (rabies, which is 100% fatal for every mammal) but most of the time bats don''t even get sick. Some bats can smell in three dimensions.', 0, 0, GETDATE(), 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f8/Florida_bonneted_bat_%28Eumops_floridanus%29.jpg/220px-Florida_bonneted_bat_%28Eumops_floridanus%29.jpg');
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (3, 'IDK but it needs help', 'PostMaloneisGod', 'bro look at the pic...', 0, 0, GETDATE(),'https://dynaimage.cdn.cnn.com/cnn/q_auto,w_900,c_fill,g_auto,h_506,ar_16:9/http%3A%2F%2Fcdn.cnn.com%2Fcnnnext%2Fdam%2Fassets%2F130911185736-ugly-animals-aye-aye.jpg' );
 
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'user', 'this is a default reply', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'user', 'Bilye wuz hear', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'user', 'this is a thirdary reply', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (1, 'ForumWarrior12', 'looks like ur brain is about as smooth as the rock in that pic.', GETDATE());
 
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'user', 'this is a default reply', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'user', 'BIG BOB wuz hear', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'user', 'this is a thirdary reply', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'PrincessBubblegum44', 'wow she''s so talented!', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'ForumWarrior12', 'The energy output required by your human body would be an unsurmountable limitation, 0/10 idea. Also I could do that blindfolded, ez', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (2, 'PostMaloneisGod', '@ForumWarrior12 bro chill wtf', GETDATE());
 
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'user', 'this is a default reply', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'user', 'Roo wuz hear', GETDATE());
-INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'user', 'this is a thirdary reply', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'TreeHugger', 'pretty cheesy post tbh', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'EuroGyro', 'probably has a Swiss sense of humour', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'DunkaroosRule', '@Treehugger hah, Gouda one', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'ForumWarrior12', 'Honestly I doubt four wheels of cheese could support a one-plus ton frame, even as EV tech evolves and chassis become lighter overall. 0/10 idea.', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (3, 'PostMaloneisGod', '@ForumWarrior12 wow...', GETDATE());
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (4, 'TreeHugger', 'what about Saving Private Rhino', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (4, 'PrincessBubblegum44', 'or Tazing Private PartyBro', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (4, 'PostMaloneisGod', '@PrincessBubblegum44 Don''t taze me bro!', GETDATE());
+
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (5, 'ForumWarrior12', '0/10. The amino acid profile necessary to synthesize the necessary life-sustaining compounds would vary for a vampire, and therefore the relationship between plasma and plant-based protien is not 1 to 1.', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (5, 'PostMaloneisGod', '@ForumWarrior12 you really need to get outside more.', GETDATE());
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (6, 'DunkaroosRule', 'You had me at "I may get hate for this..."', GETDATE());
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (7, 'NoScope360', 'is that even a koala in that picture?', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (7, 'PrincessBubblegum44', '@NoScope360 yep, they are straight from Beelzebul''s lair. Nightmare fuel.', GETDATE());
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (8, 'PrincessBubblegum44', 'yay bats! they definitely need more love <3', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (8, 'ForumWarrior12', 'Finally a reasonable post on Redidit. 11/10, as I''m sure you are as well. M''lady, could I interest you in a seltzer and the most enlightening conversation of your life? *bows and tips hat*', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (8, 'AlysiaZebb', '@ForumWarrior12 I am contacting the mods, enjoy your ban.', GETDATE());
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (8, 'PostMaloneisGod', '@AlysiaZebb YOOOOOOOOO :D', GETDATE());
+
+INSERT INTO replies (post_id, username, content, posted_date) VALUES (9, 'GregLowery', 'Hey! I have one as a pet... :(', GETDATE());
+
 
 INSERT INTO user_favorite_forum (user_id, forum_id) VALUES (1, 1);
 INSERT INTO user_favorite_forum (user_id, forum_id) VALUES (1, 2);
