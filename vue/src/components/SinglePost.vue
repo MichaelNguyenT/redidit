@@ -14,10 +14,10 @@
                 <v-divider class="mt-0 mx-4"></v-divider>
                 <v-col class="d-flex justify-space-between align-center">
                     <v-img
-                        lazy-src="https://picsum.photos/id/11/10/6"
+                        
                         max-height="200"
                         max-width="200"
-                        src="https://picsum.photos/id/11/500/300"
+                        :src = post.imageURL
                     ></v-img>
                     <v-card-text>{{ post.content }}</v-card-text>
                 </v-col>
