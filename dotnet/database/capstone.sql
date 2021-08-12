@@ -50,7 +50,11 @@ UNIQUE (user_id, forum_id)
 CREATE TABLE posts (
 	post_id int IDENTITY(1,1) NOT NULL,
 	forum_id int NOT NULL,
+<<<<<<< HEAD
 	post_title varchar(100) NOT NULL,
+=======
+	post_title varchar(MAX) NOT NULL,
+>>>>>>> f3486f456d2c1ea2be6772633a87fbf0d2861eed
 	username varchar(50) NOT NULL,
 	content varchar(3000) NOT NULL,
 	upvote_counter int NOT NULL,
@@ -83,13 +87,19 @@ CREATE TABLE replies (
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
+<<<<<<< HEAD
 INSERT INTO forums_list (forum_title, forum_picture) VALUES ('default forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
 INSERT INTO forums_list (forum_title, forum_picture) VALUES ('secondary forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
 INSERT INTO forums_list (forum_title, forum_picture) VALUES ('thirdary forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
+=======
+INSERT INTO forums_list (forum_title) VALUES ('ReDo the Wheel');
+INSERT INTO forums_list (forum_title) VALUES ('Movies that Need to be ReDone?');
+INSERT INTO forums_list (forum_title) VALUES ('Animals that Could Use a Redo.');
+>>>>>>> f3486f456d2c1ea2be6772633a87fbf0d2861eed
 
-INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'default post', 'Billy', 'this is a default post', 0, 0, GETDATE(), 'https://i.imgur.com/38avySe.jpeg');
-INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'secondary post', 'Bob', 'this is a secondary post', 0, 0, GETDATE(), 'https://gifimage.net/wp-content/uploads/2017/10/cat-gif-imgur-3.gif');
-INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) VALUES (1, 'thirdary post', 'Joe', 'this is a thirdary post', 0, 0, GETDATE());
+INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Initial Post: The wheel is old trash technology.', 'FutureMan37', 'It is 2021. Why are we using technology from the literal stoneage?? SMH. What are some ideas to make the wheel better/more modern??', 0, 0, GETDATE(), 'https://i.imgur.com/ZM5PoJa.jpeg');
+INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Be the Wheel', 'DunkaroosRule', 'why attach a whole vehicle when you can be the vehicle?', 0, 0, GETDATE(), 'https://i.imgur.com/lWkLqRP.gif');
+INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'Parm?', 'SwissCheeseStan', 'TALK ABOUT MEALS ON WHEELS JAJAJAJAJ', 0, 0, GETDATE(), 'https://static.turbosquid.com/Preview/001168/203/0Z/3D-parmesan-cheese-wheel_Z.jpg');
 
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) VALUES (2, 'default post', 'Billy', 'this is a default post', 0, 0, GETDATE());
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date) VALUES (2, 'secondary post', 'Bob', 'this is a secondary post', 0, 0, GETDATE());
