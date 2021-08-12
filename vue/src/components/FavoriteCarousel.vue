@@ -4,7 +4,7 @@
                 <v-carousel-item v-for="forum in this.$store.state.favoriteForums" v-bind:key="forum.forumId">
                  <v-row class="fill-height">
                     <v-col align="center" justify="center">
-                    <v-img src="https://cdn.mos.cms.futurecdn.net/jG3Csc3oK8zvPgzPn5CPMJ-1024-80.jpg.webp" max-height="500" max-width="500" class="ma-4"></v-img>
+                    <v-img :src = forum.forumPicture max-height="300" max-width="300" class="ma-4"></v-img>
                      <h1 class="ma-2">
                         <router-link @click="setCurrentForum(forum)" v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" >{{ forum.forumTitle }}</router-link>
                     </h1>
