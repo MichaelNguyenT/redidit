@@ -3,15 +3,15 @@
         <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum }}</h1>
         <v-row align="center" justify="center" no gutters>
             
-            <v-btn class="pa-10 ma-10">Most Recent</v-btn>
-            <v-btn class="pa-10 ma-10">Most Popular</v-btn>
+            <!-- <v-btn class="pa-10 ma-10" @click.native="sortMostRecent">Most Recent</v-btn>
+            <v-btn class="pa-10 ma-10">Most Popular</v-btn> -->
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Love Forum</v-btn>
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10" @click.native="showPostForm = !showPostForm">Add Post</v-btn>
-                <div v-show="showPostForm">
-                    <add-post />
-                </div>
             <v-btn v-if="$store.state.user.role == 'admin'" class="pa-10 ma-10" @click.native="deleteForum()">Delete Forum</v-btn>
         </v-row>
+        <div class="pa-10 ma-10" v-show="showPostForm">
+                    <add-post />
+                </div>
         <post-detail v-bind:posts="posts"/>
         <replies />
        
@@ -49,8 +49,14 @@ export default {
     methods: {
         deleteForum() {
 
+        },
+        sortMostRecent() {
+            this.post.sort((a, b) => {
+                return new Date(a.date) - new Date(b.date)
+            })
+            return this.posts;
         }
-    }
+    },
 }
 </script>
 

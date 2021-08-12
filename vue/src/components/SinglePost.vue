@@ -25,13 +25,13 @@
                 <v-col class="d-flex justify-end mb-1">
                     <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="addCounter(post.postId)">
                          <v-icon medium>
-                              mdi-duck 
+                              mdi-heart-plus 
                         </v-icon>
                             Yes {{ post.upvoteCounter }}
                         </v-chip>
                     <v-chip v-if="$store.state.token != ''" class="ma-1" @click.native="subtractCounter(post.postId)">
                          <v-icon medium>
-                            mdi-beehive-off-outline 
+                            mdi-home-remove 
                         </v-icon>
                             Eww {{ post.downvoteCounter }}
                     </v-chip>
