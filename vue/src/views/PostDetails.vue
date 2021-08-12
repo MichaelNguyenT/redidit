@@ -1,6 +1,6 @@
 <template>
     <div class="secondary">
-        <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum }}</h1>
+        <h1 align="center" class="ma-5 pa-5">{{ $store.state.currentForum.forumTitle }}</h1>
         <v-row align="center" justify="center" no gutters>
             
             <!-- <v-btn class="pa-10 ma-10" @click.native="sortMostRecent">Most Recent</v-btn>

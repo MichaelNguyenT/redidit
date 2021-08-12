@@ -7,9 +7,9 @@
                         <v-img :src = forum.forumPicture     max-height="300" max-width="300" class="ma-4">
                         </v-img>
                         <h1 class="ma-2">
-                        <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
+                        <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setCurrentForum(forum)">{{ forum.forumTitle }}</router-link>
                         </h1>
-                     <v-chip v-if="$store.state.token != ''" @click.native="loveForum" class="align-end ma-4 pa-6">Love</v-chip>
+                     <v-chip v-if="$store.state.token != ''" @click.native="setCurrentForum(forum), loveForum()" class="align-end ma-4 pa-6">Love</v-chip>
                     </v-col>
                 </v-row>
             </v-carousel-item>    
@@ -36,19 +36,25 @@ export default {
             })
     },
     methods: {
-        setTitle(title) {
-            this.$store.commit('SET_CURRENT_FORUM', title);
+        setTitle(forum) {
+            this.$store.commit('SET_CURRENT_FORUM', forum);
         },
+        // loveForum() {
+        //     postService.loveForum(this.userId, this.$store.state.currentForum.forumId)
+        //     .then(resp => {
+        //             if (resp.status == 200) {
+        //             this.$store.commit('LOVE_FORUM', this.$store.state.currentForum.forumId);
+        //         }
+        //     }
+        //     )},
+
         loveForum() {
-            postService.loveForum(this.userId, this.forumId)
-            .then(resp => {
-                    if (resp.status == 200) {
-                    this.$store.commit('LOVE_FORUM', this.forumId);
-                    this.userId = this.$store.state.user.userId;
-                    this.forumId = this.$store.state.forumId;
-                }
-            }
-            )}
+                    this.$store.commit('LOVE_FORUM', this.$store.state.currentForum);
+                },
+
+        setCurrentForum(forum) {
+            this.$store.commit('SET_CURRENT_FORUM', forum);
+        }
 }
 }
 </script>

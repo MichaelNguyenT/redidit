@@ -32,7 +32,7 @@
           <router-link
             class="pa-2"
             v-bind:to="{ name: 'myaccount' }"
-            v-if="$store.state.token != ''"
+            v-if="$store.state.token != ''" 
             >MyAccount</router-link
           >
           
@@ -40,6 +40,7 @@
             class="pa-2"
             v-bind:to="{ name: 'logout' }"
             v-if="$store.state.token != ''"
+            @click.native="resetFavoriteForums()"
             >Logout</router-link
           >
         </v-app-bar>
@@ -48,3 +49,15 @@
     <router-view />
   </v-app>
 </template>
+
+<script>
+
+export default {
+    methods: {
+  resetFavoriteForums() {
+    this.$store.commit('CLEAR_FAVORITE_FORUMS');
+    }
+  }
+
+}
+</script>
