@@ -7,9 +7,9 @@
             <v-btn class="pa-10 ma-10">Most Popular</v-btn> -->
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10">Love Forum</v-btn>
             <v-btn v-if="$store.state.token != ''" class="pa-10 ma-10" @click.native="showPostForm = !showPostForm">Add Post</v-btn>
-                <div v-show="showPostForm">
+                <!-- <div v-show="showPostForm">
                     <add-post />
-                </div>
+                </div> -->
             <v-btn v-if="$store.state.user.role == 'admin'" class="pa-10 ma-10" v-on:click="deleteForum(currentForum)">Delete Forum</v-btn>
         </v-row>
         <div class="pa-10 ma-10" v-show="showPostForm">
