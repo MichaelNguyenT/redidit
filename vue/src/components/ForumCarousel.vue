@@ -4,7 +4,7 @@
                 <v-carousel-item v-for="forum in forums" v-bind:key="forum.forumId">
                  <v-row class="fill-height">
                     <v-col align="center" justify="center">
-                        <v-img src="forum.forumPicture"      max-height="500" max-width="500" class="ma-4">
+                        <v-img :src = forum.forumPicture     max-height="300" max-width="300" class="ma-4">
                         </v-img>
                         <h1 class="ma-2">
                         <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
