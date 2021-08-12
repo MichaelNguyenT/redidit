@@ -51,7 +51,8 @@
                             </v-card>
                     </v-dialog>
                 </template>
-            <v-chip v-if="$store.state.user.role == 'admin'" class="ma-1" @click.native="deletePost()">Delete Post</v-chip>
+                <!-- v-if="$store.state.user.role == 'admin' @click.native" -->
+            <v-chip  class="ma-1" v-if="$store.state.user.role == 'admin'" v-on:click="deletePost(post.postId)">Delete Post</v-chip>
             </v-col>
         </v-card>
    </v-row>   
@@ -120,9 +121,19 @@ export default {
                     this.$store.commit("SET_VOTE_COUNTERS", updateObject)
                 })
         },
-        deletePost() {
-
-        }
+        deletePost(postId) {
+            if (
+                confirm("Are you sure you want to delete this card? This action cannot be undone.")
+            ){
+            postService.deletePost(postId)
+            .then((response) => {
+                if (response.status === 204) {
+              alert("Post has been deleted");
+              window.location.reload();
+            }
+            })
+            }
+        },
     },
     filters: {
         moment: function(postedDate) {

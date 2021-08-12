@@ -147,7 +147,9 @@ namespace Capstone.DAO
                     SqlCommand cmd = new SqlCommand("BEGIN TRANSACTION "+
                                                         "DELETE FROM replies "+
                                                         "WHERE post_id = @postId "+
-                                                        "DELETE FROM posts "+
+                                                        "DELETE FROM user_vote_posts WHERE post_id IN " + //delete votes in forum (tied to posts)
+                                                            "(SELECT post_id FROM posts WHERE post_id = @postId) " +
+                                                        "DELETE FROM posts " +
                                                         "WHERE post_id = @postId " +
                                                     "COMMIT TRANSACTION", conn);
                     cmd.Parameters.AddWithValue("@postId", postId);
