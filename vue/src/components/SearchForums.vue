@@ -6,9 +6,11 @@
           
       </v-container>
     </v-form>
-    <div v-for="forum in filteredForums" v-bind:key="forum.forumId">
-        <h1>{{ forum.forumTitle }}</h1>
-    </div>
+    <v-card class="ma-1 pa-1" v-for="forum in filteredForums" v-bind:key="forum.forumId">
+        <h1>
+        <router-link  v-bind:to="{name: 'post-details', params: { forumId: forum.forumId }}" class="secondary--text" @click.native="setTitle(forum.forumTitle)">{{ forum.forumTitle }}</router-link>
+        </h1>
+    </v-card>
 </div>
 </template>
 
@@ -29,10 +31,15 @@ export default {
                 this.forums = resp.data;
             })
     },
+    methods: {
+        setTitle(title) {
+            this.$store.commit('SET_CURRENT_FORUM', title);
+        }
+    },    
     computed: {
         filteredForums(){ 
             return this.forums.filter(forum => {
-                return forum.forumtTitle.toLowerCase().includes(this.search.toLowerCase());
+                return forum.forumTitle.toLowerCase().includes(this.search.toLowerCase());
             })
         }
     }
