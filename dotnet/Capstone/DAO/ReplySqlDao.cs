@@ -77,7 +77,6 @@ namespace Capstone.DAO
 
         public Reply CreateReply(int postId, string username, string content)
         {
-            Reply returnReply = null;
             int newReplyId = 0;
 
             try

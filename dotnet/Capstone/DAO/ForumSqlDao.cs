@@ -17,9 +17,8 @@ namespace Capstone.DAO
             connectionString = dbConnectionString;
         }
 
-        public Forum CreateForum(string forumTitle)
+        public Forum CreateForum(string forumTitle, string forumPicture)
         {
-            Forum returnForum = null;
             int newForumId = 0;
 
             try
@@ -28,10 +27,11 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("INSERT INTO forums_list (forum_title) " +
+                    SqlCommand cmd = new SqlCommand("INSERT INTO forums_list (forum_title, forum_picture) " +
                         "OUTPUT INSERTED.*" +
-                        "VALUES (@forum_title)", conn);
+                        "VALUES (@forum_title, @forum_picture)", conn);
                     cmd.Parameters.AddWithValue("@forum_title", forumTitle);
+                    cmd.Parameters.AddWithValue("@forum_picture", forumPicture);
 
                     newForumId = Convert.ToInt32(cmd.ExecuteScalar());
                     //promoteToModerator(GetUser(Environment.UserName), newForumId);
@@ -138,7 +138,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT forum_id, forum_title " +
+                    SqlCommand cmd = new SqlCommand("SELECT forum_id, forum_title, forum_picture " +
                                                     "FROM forums_list " +
                                                     "WHERE forum_id = @forumId;", conn);
                     cmd.Parameters.AddWithValue("@forumId", forumId);
@@ -166,7 +166,7 @@ namespace Capstone.DAO
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand("SELECT forum_id, forum_title "+
+                    SqlCommand cmd = new SqlCommand("SELECT forum_id, forum_title, forum_picture "+
                                                     "FROM forums_list", conn);
                     SqlDataReader reader = cmd.ExecuteReader();
 
@@ -239,7 +239,6 @@ namespace Capstone.DAO
 
         public List<Forum> GetFavoriteForums(int userId)
         {
-            int returnForumId = 0;
             List<Forum> forums = new List<Forum>();
 
             try
@@ -257,7 +256,7 @@ namespace Capstone.DAO
 
                     while (reader.Read())
                     {
-                        returnForumId = GetForumIdFromReader(reader);
+                        int returnForumId = GetForumIdFromReader(reader);
                         forums.Add(GetForum(returnForumId));
                     }
                 }
@@ -276,7 +275,8 @@ namespace Capstone.DAO
             Forum f = new Forum()
             {
                 ForumId = Convert.ToInt32(reader["forum_id"]),
-                ForumTitle = Convert.ToString(reader["forum_title"])
+                ForumTitle = Convert.ToString(reader["forum_title"]),
+                ForumPicture = Convert.ToString(reader["forum_picture"])
             };
             return f;
         }

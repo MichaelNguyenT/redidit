@@ -10,7 +10,7 @@ namespace Capstone.DAO
     {
         Forum GetForum(int forumId);
         List<Forum> GetForums();
-        Forum CreateForum(string forumTitle);
+        Forum CreateForum(string forumTitle, string forumPicture);
         void PromoteToModerator(int userId, int forumId);
         bool CheckUserModeratorForum(int userId, int forumId);
         void DeleteForum(int forumId);
