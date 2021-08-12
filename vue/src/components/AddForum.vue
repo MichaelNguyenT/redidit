@@ -7,6 +7,7 @@
         <v-card-text>
             <v-form class="px-3">
                 <v-text-field label="Forum Name" v-model="forum.forumTitle" prepend-icon="" required></v-text-field>
+                <v-text-field label="Forum Picture" v-model="forum.forumPicture" prepend-icon="camera-plus"></v-text-field>
                 <v-btn flat class="success mx-0 mt-3" @click.native="createForum()">Create</v-btn>
             </v-form>
         </v-card-text>
@@ -23,7 +24,8 @@ export default {
     data() {
     return {
       forum: {
-        forumTitle: ""
+        forumTitle: "",
+        forumPicture: ""
       }
     };
   },
@@ -35,7 +37,8 @@ export default {
             .then(response => {
                 if (response.status == 200) {
                     this.forum = {
-                        forumTitle: ""
+                        forumTitle: "",
+                        forumPicture: ""
                     }
                     alert('Forum succesfully created!');
                     this.$router.push('/');

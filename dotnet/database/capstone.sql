@@ -17,7 +17,8 @@ GO
 --create tables
 CREATE TABLE forums_list (
 	forum_id int IDENTITY(1,1) NOT NULL,
-	forum_title varchar(40) NOT NULL
+	forum_title varchar(100) NOT NULL,
+	forum_picture varchar(MAX)
 	CONSTRAINT PK_forums PRIMARY KEY (forum_id)
 )
 
@@ -49,7 +50,7 @@ UNIQUE (user_id, forum_id)
 CREATE TABLE posts (
 	post_id int IDENTITY(1,1) NOT NULL,
 	forum_id int NOT NULL,
-	post_title varchar(40) NOT NULL,
+	post_title varchar(100) NOT NULL,
 	username varchar(50) NOT NULL,
 	content varchar(3000) NOT NULL,
 	upvote_counter int NOT NULL,
@@ -82,9 +83,9 @@ CREATE TABLE replies (
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('user','Jg45HuwT7PZkfuKTz6IB90CtWY4=','LHxP4Xh7bN0=','user');
 INSERT INTO users (username, password_hash, salt, user_role) VALUES ('admin','YhyGVQ+Ch69n4JMBncM4lNF/i9s=', 'Ar/aB2thQTI=','admin');
 
-INSERT INTO forums_list (forum_title) VALUES ('default forum');
-INSERT INTO forums_list (forum_title) VALUES ('secondary forum');
-INSERT INTO forums_list (forum_title) VALUES ('thirdary forum');
+INSERT INTO forums_list (forum_title, forum_picture) VALUES ('default forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
+INSERT INTO forums_list (forum_title, forum_picture) VALUES ('secondary forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
+INSERT INTO forums_list (forum_title, forum_picture) VALUES ('thirdary forum', 'http://static1.squarespace.com/static/55ef2da9e4b03f6e1ef0cd28/t/5cddb9fb5ed3ff0001d64d24/1558034940526/Mark.jpg?format=1500w');
 
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'default post', 'Billy', 'this is a default post', 0, 0, GETDATE(), 'https://i.imgur.com/38avySe.jpeg');
 INSERT INTO posts (forum_id, post_title, username, content, upvote_counter, downvote_counter, posted_date, image_url) VALUES (1, 'secondary post', 'Bob', 'this is a secondary post', 0, 0, GETDATE(), 'https://gifimage.net/wp-content/uploads/2017/10/cat-gif-imgur-3.gif');
